@@ -1,0 +1,463 @@
+---
+interface Props {
+  className?: string
+}
+const { className = '' } = Astro.props
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden {className}" aria-labelledby="hero-title">
+  <!-- Animated Data Center Background -->
+  <div class="absolute inset-0 z-0" aria-hidden="true">
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-50" />
+
+    <!-- Radial gradient glow -->
+    <div class="absolute inset-0 bg-radial-gold" />
+
+    <!-- Floating particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+      <div class="particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+      <div class="particle" style="top: 60%; left: 15%; animation-delay: 2s;"></div>
+      <div class="particle" style="top: 80%; left: 75%; animation-delay: 3s;"></div>
+      <div class="particle" style="top: 40%; left: 50%; animation-delay: 4s;"></div>
+      <div class="particle" style="top: 30%; left: 30%; animation-delay: 5s;"></div>
+      <div class="particle" style="top: 70%; left: 60%; animation-delay: 6s;"></div>
+      <div class="particle" style="top: 15%; left: 65%; animation-delay: 7s;"></div>
+    </div>
+
+    <!-- Data center server racks animation -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[60vh] opacity-30" aria-hidden="true">
+      <svg viewBox="0 0 800 400" class="w-full h-full" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="serverGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#d0ac3c" stop-opacity="0.3" />
+            <stop offset="50%" stop-color="#d0ac3c" stop-opacity="0.1" />
+            <stop offset="100%" stop-color="#1e293b" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="rackGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="50%" stop-color="#334155" />
+            <stop offset="100%" stop-color="#1e293b" />
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Server Racks -->
+        <g class="server-racks" filter="url(#glow)">
+          <!-- Rack 1 -->
+          <rect x="50" y="50" width="100" height="300" rx="4" fill="url(#rackGradient)" stroke="#d0ac3c" stroke-width="1" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;0.8;0.6" dur="4s" repeatCount="indefinite" begin="0s" />
+          </rect>
+          <g class="rack-leds">
+            <rect x="65" y="70" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="0s" />
+            </rect>
+            <rect x="65" y="90" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="0.2s" />
+            </rect>
+            <rect x="65" y="110" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="0.4s" />
+            </rect>
+            <rect x="65" y="130" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="0.6s" />
+            </rect>
+            <rect x="65" y="150" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="0.8s" />
+            </rect>
+            <rect x="65" y="170" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="1s" />
+            </rect>
+            <rect x="65" y="190" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="1.2s" />
+            </rect>
+            <rect x="65" y="210" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="1.4s" />
+            </rect>
+            <rect x="65" y="230" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="1.6s" />
+            </rect>
+            <rect x="65" y="250" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="1.8s" />
+            </rect>
+            <rect x="65" y="270" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="2s" />
+            </rect>
+            <rect x="65" y="290" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite" begin="2.2s" />
+            </rect>
+          </g>
+
+          <!-- Rack 2 -->
+          <rect x="180" y="80" width="100" height="270" rx="4" fill="url(#rackGradient)" stroke="#d0ac3c" stroke-width="1" opacity="0.5">
+            <animate attributeName="opacity" values="0.5;0.7;0.5" dur="4s" repeatCount="indefinite" begin="0.5s" />
+          </rect>
+          <g class="rack-leds">
+            <rect x="195" y="100" width="70" height="8" rx="2" fill="#22c55e" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="0.3s" />
+            </rect>
+            <rect x="195" y="120" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="0.5s" />
+            </rect>
+            <rect x="195" y="140" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="0.7s" />
+            </rect>
+            <rect x="195" y="160" width="70" height="8" rx="2" fill="#22c55e" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="0.9s" />
+            </rect>
+            <rect x="195" y="180" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="1.1s" />
+            </rect>
+            <rect x="195" y="200" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="1.3s" />
+            </rect>
+            <rect x="195" y="220" width="70" height="8" rx="2" fill="#22c55e" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="1.5s" />
+            </rect>
+            <rect x="195" y="240" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="1.7s" />
+            </rect>
+            <rect x="195" y="260" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="1.9s" />
+            </rect>
+            <rect x="195" y="280" width="70" height="8" rx="2" fill="#22c55e" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="2.1s" />
+            </rect>
+            <rect x="195" y="300" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.8s" repeatCount="indefinite" begin="2.3s" />
+            </rect>
+          </g>
+
+          <!-- Rack 3 -->
+          <rect x="310" y="40" width="100" height="310" rx="4" fill="url(#rackGradient)" stroke="#d0ac3c" stroke-width="1" opacity="0.7">
+            <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3.5s" repeatCount="indefinite" begin="0.2s" />
+          </rect>
+          <g class="rack-leds">
+            <rect x="325" y="60" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="0.1s" />
+            </rect>
+            <rect x="325" y="80" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="0.3s" />
+            </rect>
+            <rect x="325" y="100" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="0.5s" />
+            </rect>
+            <rect x="325" y="120" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="0.7s" />
+            </rect>
+            <rect x="325" y="140" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="0.9s" />
+            </rect>
+            <rect x="325" y="160" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="1.1s" />
+            </rect>
+            <rect x="325" y="180" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="1.3s" />
+            </rect>
+            <rect x="325" y="200" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="1.5s" />
+            </rect>
+            <rect x="325" y="220" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="1.7s" />
+            </rect>
+            <rect x="325" y="240" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="1.9s" />
+            </rect>
+            <rect x="325" y="260" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="2.1s" />
+            </rect>
+            <rect x="325" y="280" width="70" height="8" rx="2" fill="#22c55e" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="2.3s" />
+            </rect>
+            <rect x="325" y="300" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="2.5s" />
+            </rect>
+            <rect x="325" y="320" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.2s" repeatCount="indefinite" begin="2.7s" />
+            </rect>
+          </g>
+
+          <!-- Rack 4 -->
+          <rect x="440" y="70" width="100" height="280" rx="4" fill="url(#rackGradient)" stroke="#d0ac3c" stroke-width="1" opacity="0.55">
+            <animate attributeName="opacity" values="0.55;0.75;0.55" dur="4.2s" repeatCount="indefinite" begin="0.8s" />
+          </rect>
+          <g class="rack-leds">
+            <rect x="455" y="90" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="0.4s" />
+            </rect>
+            <rect x="455" y="110" width="70" height="8" rx="2" fill="#22c55e" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="0.6s" />
+            </rect>
+            <rect x="455" y="130" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="0.8s" />
+            </rect>
+            <rect x="455" y="150" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="1s" />
+            </rect>
+            <rect x="455" y="170" width="70" height="8" rx="2" fill="#22c55e" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="1.2s" />
+            </rect>
+            <rect x="455" y="190" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="1.4s" />
+            </rect>
+            <rect x="455" y="210" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="1.6s" />
+            </rect>
+            <rect x="455" y="230" width="70" height="8" rx="2" fill="#22c55e" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="1.8s" />
+            </rect>
+            <rect x="455" y="250" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="2s" />
+            </rect>
+            <rect x="455" y="270" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="2.2s" />
+            </rect>
+            <rect x="455" y="290" width="70" height="8" rx="2" fill="#22c55e" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="2.4s" />
+            </rect>
+            <rect x="455" y="310" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.25;0.85" dur="1.6s" repeatCount="indefinite" begin="2.6s" />
+            </rect>
+          </g>
+
+          <!-- Rack 5 -->
+          <rect x="570" y="60" width="100" height="290" rx="4" fill="url(#rackGradient)" stroke="#d0ac3c" stroke-width="1" opacity="0.65">
+            <animate attributeName="opacity" values="0.65;0.85;0.65" dur="3.8s" repeatCount="indefinite" begin="0.3s" />
+          </rect>
+          <g class="rack-leds">
+            <rect x="585" y="80" width="70" height="8" rx="2" fill="#22c55e" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="0.2s" />
+            </rect>
+            <rect x="585" y="100" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="0.4s" />
+            </rect>
+            <rect x="585" y="120" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="0.6s" />
+            </rect>
+            <rect x="585" y="140" width="70" height="8" rx="2" fill="#22c55e" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="0.8s" />
+            </rect>
+            <rect x="585" y="160" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="1s" />
+            </rect>
+            <rect x="585" y="180" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="1.2s" />
+            </rect>
+            <rect x="585" y="200" width="70" height="8" rx="2" fill="#22c55e" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="1.4s" />
+            </rect>
+            <rect x="585" y="220" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="1.6s" />
+            </rect>
+            <rect x="585" y="240" width="70" height="8" rx="2" fill="#22c55e" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="1.8s" />
+            </rect>
+            <rect x="585" y="260" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="2s" />
+            </rect>
+            <rect x="585" y="280" width="70" height="8" rx="2" fill="#d0ac3c" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="2.2s" />
+            </rect>
+            <rect x="585" y="300" width="70" height="8" rx="2" fill="#22c55e" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="2.4s" />
+            </rect>
+            <rect x="585" y="320" width="70" height="8" rx="2" fill="#3b82f6" opacity="0.88">
+              <animate attributeName="opacity" values="0.88;0.28;0.88" dur="1.4s" repeatCount="indefinite" begin="2.6s" />
+            </rect>
+          </g>
+        </g>
+
+        <!-- Floor reflection -->
+        <rect x="50" y="350" width="620" height="30" fill="url(#serverGlow)" opacity="0.3" />
+
+        <!-- Network cables -->
+        <g stroke="#d0ac3c" stroke-width="1" opacity="0.3">
+          <line x1="100" y1="50" x2="100" y2="0" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite" />
+          </line>
+          <line x1="230" y1="80" x2="230" y2="0" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite" begin="0.5s" />
+          </line>
+          <line x1="360" y1="40" x2="360" y2="0" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite" begin="0.2s" />
+          </line>
+          <line x1="490" y1="70" x2="490" y2="0" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite" begin="0.8s" />
+          </line>
+          <line x1="620" y1="60" x2="620" y2="0" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite" begin="0.3s" />
+          </line>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Floating data particles -->
+    <div class="absolute inset-0" aria-hidden="true">
+      <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+          <radialGradient id="particleGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#d0ac3c" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#d0ac3c" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <g class="data-particles">
+          <circle cx="10" cy="10" r="1.5" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="10;90;10" dur="8s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="25" cy="20" r="1" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="20;95;20" dur="10s" repeatCount="indefinite" begin="1s" />
+            <animate attributeName="opacity" values="0.6;0.1;0.6" dur="5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="40" cy="5" r="1.2" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="5;85;5" dur="7s" repeatCount="indefinite" begin="0.5s" />
+            <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="55" cy="30" r="0.8" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="30;90;30" dur="9s" repeatCount="indefinite" begin="1.5s" />
+            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="4.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="70" cy="15" r="1" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="15;95;15" dur="8s" repeatCount="indefinite" begin="0.8s" />
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="85" cy="25" r="1.3" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="25;88;25" dur="11s" repeatCount="indefinite" begin="2s" />
+            <animate attributeName="opacity" values="0.7;0.2;0.7" dur="5.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="90" cy="40" r="1" fill="url(#particleGlow)">
+            <animate attributeName="cy" values="40;92;40" dur="6s" repeatCount="indefinite" begin="1.2s" />
+            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="3s" repeatCount="indefinite" />
+          </circle>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 container-custom px-4 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-slate-700/50 backdrop-blur-sm mb-8 animate-fade-in-up" style="animation-delay: 100ms;">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-500 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-500"></span>
+        </span>
+        <span class="text-sm font-medium text-gold-400">Consultoria IA & Infraestrutura Corporativa</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 id="hero-title" class="text-5xl sm:text-6xl lg:text-7xl font-bold font-space-grotesk leading-[1.1] tracking-tight mb-6 animate-fade-in-up" style="animation-delay: 200ms;">
+        <span class="text-slate-100">Founders</span>
+        <span class="text-gradient-gold"> AI</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg sm:text-xl lg:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 300ms;">
+        Transformamos desafios corporativos em vantagens competitivas através de
+        <span class="text-gradient-gold-subtle font-medium">Inteligência Artificial</span>
+        e infraestrutura de servidores de classe enterprise.
+      </p>
+
+      <!-- Description -->
+      <p class="text-slate-400 text-base sm:text-lg mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 400ms;">
+        Especialistas em Copilot, ChatGPT, Claude e as principais IAs do mercado.
+        Da estratégia à implementação: servidores, planejamento de infraestrutura e adoção de IA em escala.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style="animation-delay: 500ms;">
+        <a href="#contato" class="btn-primary w-full sm:w-auto">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Iniciar Projeto
+        </a>
+        <a href="#servicos" class="btn-secondary w-full sm:w-auto">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          Nossos Serviços
+        </a>
+      </div>
+
+      <!-- Trust Indicators -->
+      <div class="mt-16 animate-fade-in-up" style="animation-delay: 600ms;">
+        <div class="flex flex-wrap items-center justify-center gap-8 text-slate-500 text-sm">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            15+ Anos Mercado Corporativo
+          </span>
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            50+ Projetos Entregues
+          </span>
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            99.9% Uptime Garantido
+          </span>
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Certificações Enterprise
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10" aria-hidden="true">
+    <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #d0ac3c 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+    25% { transform: translateY(-30px) translateX(10px); opacity: 0.6; }
+    50% { transform: translateY(-15px) translateX(-5px); opacity: 0.8; }
+    75% { transform: translateY(-25px) translateX(15px); opacity: 0.4; }
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .particle,
+    .server-racks rect,
+    .rack-leds rect,
+    .data-particles circle,
+    .animate-fade-in-up,
+    .animate-bounce {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .animate-fade-in-up { opacity: 1 !important; }
+  }
+</style>
