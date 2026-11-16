@@ -234,48 +234,17 @@ describe('Founders AI - Build Verification Tests', () => {
     });
   });
 
-  describe('Hero Video', () => {
-    test('hero section has video element', () => {
-      assert.ok(/<video\b/i.test(heroSection), 'Hero section should contain a <video> element');
+  describe('Hero Background', () => {
+    test('hero uses the local animated GIF as its decorative background', () => {
+      const imageMatch = heroSection.match(/<img\b[^>]*class=["']?hero-video["']?[^>]*>/i);
+      assert.ok(imageMatch, 'Hero section should contain the background image');
+      assert.ok(/src=["']?\/(?:founders-ai\/)?assets\/videos\/hero-bg\.gif["']?/i.test(imageMatch[0]), 'Hero should use the local GIF asset');
+      assert.ok(/alt=["']["']/i.test(imageMatch[0]), 'Decorative background should have empty alt text');
+      assert.ok(/aria-hidden=["']?true/i.test(imageMatch[0]), 'Decorative background should be hidden from assistive technology');
     });
 
-    test('hero video uses the local background asset', () => {
-      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
-      assert.ok(videoMatch, 'Should have a video element');
-      assert.ok(/<source[^>]*src=["']?\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video should use the deployed local asset');
-    });
-
-    test('hero video has muted attribute', () => {
-      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
-      assert.ok(videoMatch, 'Should have a video element');
-      const videoHtml = videoMatch[0];
-      assert.ok(/\bmuted\b/i.test(videoHtml), 'Video should have muted attribute');
-    });
-
-    test('hero video has loop attribute', () => {
-      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
-      assert.ok(videoMatch, 'Should have a video element');
-      const videoHtml = videoMatch[0];
-      assert.ok(/\bloop\b/i.test(videoHtml), 'Video should have loop attribute');
-    });
-
-    test('hero video has playsinline attribute', () => {
-      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
-      assert.ok(videoMatch, 'Should have a video element');
-      const videoHtml = videoMatch[0];
-      assert.ok(/\bplaysinline\b/i.test(videoHtml), 'Video should have playsinline attribute');
-    });
-
-    test('hero video poster uses the local background asset', () => {
-      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
-      assert.ok(videoMatch, 'Should have a video element');
-      assert.ok(/poster=["']?\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video poster should use the local asset');
-    });
-
-    test('decorative hero video is hidden from assistive technologies', () => {
-      assert.ok(/class=["']?hero-visual["']?[^>]*aria-hidden=["']?true/i.test(heroSection), 'Decorative hero visual should be aria-hidden');
-      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
-      assert.ok(videoMatch && /\bmuted\b/i.test(videoMatch[0]), 'Decorative video should be muted');
+    test('hero background is hidden for reduced-motion preferences', () => {
+      assert.ok(/@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss), 'Animated background should be hidden for reduced motion');
     });
   });
 
