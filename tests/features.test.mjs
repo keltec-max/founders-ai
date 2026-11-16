@@ -20,11 +20,12 @@ test('contact section lists the confirmed channels and SAP HANA expertise', () =
   assert.match(source, /Infraestrutura SAP HANA/);
   assert.doesNotMatch(source, /contato@founders-ai\.com|3000-0000|linkedin\.com\/company\/founders-ai/i);
 });
-test('hero uses a local GIF and hides it for reduced-motion preferences', () => {
+test('hero uses the local video and hides it for reduced-motion preferences', () => {
   const source = read('src/components/Hero.astro');
-  assert.match(source, /<img class="hero-video" src="\/assets\/videos\/hero-bg\.gif" alt="" aria-hidden="true" \/>/);
+  assert.match(source, /<video class="hero-video" autoplay loop muted playsinline poster="\/assets\/videos\/hero-bg\.mp4">/);
+  assert.match(source, /<source src="\/assets\/videos\/hero-bg\.mp4" type="video\/mp4">/);
   assert.match(source, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.hero-video \{\s*display: none;/);
-  assert.ok(existsSync(new URL('../public/assets/videos/hero-bg.gif', import.meta.url)));
+  assert.ok(existsSync(new URL('../public/assets/videos/hero-bg.mp4', import.meta.url)));
 });
 test('all translation dictionaries compile without syntax errors', () => {
   const result = ts.transpileModule(read('src/i18n/locales.ts'), {

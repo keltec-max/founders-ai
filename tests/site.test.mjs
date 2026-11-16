@@ -234,17 +234,20 @@ describe('Founders AI - Build Verification Tests', () => {
     });
   });
 
-  describe('Hero Background', () => {
-    test('hero uses the local animated GIF as its decorative background', () => {
-      const imageMatch = heroSection.match(/<img\b[^>]*class=["']?hero-video["']?[^>]*>/i);
-      assert.ok(imageMatch, 'Hero section should contain the background image');
-      assert.ok(/src=["']?\/(?:founders-ai\/)?assets\/videos\/hero-bg\.gif["']?/i.test(imageMatch[0]), 'Hero should use the local GIF asset');
-      assert.ok(/alt=["']["']/i.test(imageMatch[0]), 'Decorative background should have empty alt text');
-      assert.ok(/aria-hidden=["']?true/i.test(imageMatch[0]), 'Decorative background should be hidden from assistive technology');
+  describe('Hero Video', () => {
+    test('hero uses the local MP4 with autoplay-safe attributes', () => {
+      const videoMatch = heroSection.match(/<video\b[^>]*>[\s\S]*?<\/video>/i);
+      assert.ok(videoMatch, 'Hero section should contain a video element');
+      assert.ok(/autoplay/i.test(videoMatch[0]), 'Video should autoplay');
+      assert.ok(/loop/i.test(videoMatch[0]), 'Video should loop');
+      assert.ok(/muted/i.test(videoMatch[0]), 'Video should be muted');
+      assert.ok(/playsinline/i.test(videoMatch[0]), 'Video should play inline');
+      assert.ok(/poster=["']?\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video should use the local poster asset');
+      assert.ok(/<source[^>]*src=["']?\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video should use the local MP4 source');
     });
 
-    test('hero background is hidden for reduced-motion preferences', () => {
-      assert.ok(/@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss), 'Animated background should be hidden for reduced motion');
+    test('hero video is hidden for reduced-motion preferences', () => {
+      assert.ok(/@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss), 'Video should be hidden for reduced motion');
     });
   });
 
