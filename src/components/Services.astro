@@ -69,6 +69,7 @@ const services = [
           </div>
           <h3 data-i18n={`services.${service.number}.title`}>{service.title}</h3>
           <p data-i18n={`services.${service.number}.desc`}>{service.description}</p>
+          <div style="flex: 1" />
           <ul role="list">
             {service.items.map((item, i) => (
               <li data-i18n={`services.${service.number}.items.${i}`}>{item}</li>
@@ -93,6 +94,9 @@ const services = [
     border: 1px solid var(--color-line);
     border-radius: 6px;
     overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
   }
   .service-card:first-child {
     border-color: #6c5a37;
@@ -213,7 +217,7 @@ const services = [
     background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80');
     background-size: cover;
     background-position: center;
-    opacity: 0.12;
+    opacity: 0.18;
     z-index: 0;
     pointer-events: none;
   }
