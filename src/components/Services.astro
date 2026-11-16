@@ -55,9 +55,12 @@ const services = [
       <p data-i18n="services.desc">Cobrimos o ciclo completo: descoberta, arquitetura, implementação, governança e evolução contínua.</p>
     </div>
     <div class="service-grid">
-      {services.map((service) => (
-        <article class="service-card">
+      {services.map((service, index) => (
+        <article class="service-card" data-service-index={index}>
           <div class="service-card-border" aria-hidden="true"></div>
+          {index === 2 && (
+            <div class="service-bg-image" aria-hidden="true" />
+          )}
           <div class="service-top">
             <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -203,6 +206,20 @@ const services = [
   .service-card li::before {
     content: '+';
     color: var(--color-gold);
+  }
+  .service-bg-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .service-card > * {
+    position: relative;
+    z-index: 1;
   }
   @media (max-width: 1050px) {
     .service-card { padding: 22px; }
