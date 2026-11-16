@@ -228,8 +228,8 @@ describe('Founders AI - Build Verification Tests', () => {
 
     test('prefers-reduced-motion hides the hero video', () => {
       assert.ok(
-        /@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss),
-        'Should hide the hero video for reduced-motion preferences'
+        /@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*,\s*\.hero-fallback(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss),
+        'Should hide animated hero media for reduced-motion preferences'
       );
     });
   });
@@ -242,12 +242,12 @@ describe('Founders AI - Build Verification Tests', () => {
       assert.ok(/loop/i.test(videoMatch[0]), 'Video should loop');
       assert.ok(/muted/i.test(videoMatch[0]), 'Video should be muted');
       assert.ok(/playsinline/i.test(videoMatch[0]), 'Video should play inline');
-      assert.ok(/poster=["']?\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video should use the local poster asset');
-      assert.ok(/<source[^>]*src=["']?\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video should use the local MP4 source');
+      assert.ok(/poster=["']?\/founders-ai\/assets\/videos\/hero-poster\.jpg["']?/i.test(videoMatch[0]), 'Video should use the local poster asset');
+      assert.ok(/<source[^>]*src=["']?\/founders-ai\/assets\/videos\/hero-bg\.mp4["']?/i.test(videoMatch[0]), 'Video should use the local MP4 source');
     });
 
     test('hero video is hidden for reduced-motion preferences', () => {
-      assert.ok(/@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss), 'Video should be hidden for reduced motion');
+      assert.ok(/@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?\.hero-video(?:\[[^\]]+\])?\s*,\s*\.hero-fallback(?:\[[^\]]+\])?\s*\{[^}]*display\s*:\s*none/i.test(allCss), 'Animated hero media should be hidden for reduced motion');
     });
   });
 

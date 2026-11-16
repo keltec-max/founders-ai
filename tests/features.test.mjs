@@ -5,12 +5,12 @@ import ts from 'typescript';
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('technology items include inline logos and translated names', () => {
+test('technology items have data-i18n on tech-name span only (not on li) to preserve logos during language switch', () => {
   const source = read('src/components/Technologies.astro');
-  assert.equal((source.match(/\{ name: '[^']+', logo: \w+ \}/g) || []).length, 16);
-  assert.match(source, /<li class="tech-item" data-i18n=\{`tech\.cat\./);
-  assert.match(source, /<span class="tech-logo" set:html=\{item\.logo\}><\/span>/);
-  assert.match(source, /<span class="tech-name">\{item\.name\}<\/span>/);
+  // The data-i18n should be on the .tech-name span, NOT on the parent <li>
+  // If it's on <li>, the i18n script will replace entire innerHTML including the logo
+  assert.doesNotMatch(source, /<li class="tech-item" data-i18n=\{`tech\.cat\./);
+  assert.match(source, /<span class="tech-name" data-i18n=\{`tech\.cat\./);
 });
 
 test('contact section lists the confirmed channels and SAP HANA expertise', () => {
@@ -20,12 +20,22 @@ test('contact section lists the confirmed channels and SAP HANA expertise', () =
   assert.match(source, /Infraestrutura SAP HANA/);
   assert.doesNotMatch(source, /contato@founders-ai\.com|3000-0000|linkedin\.com\/company\/founders-ai/i);
 });
-test('hero uses the local video and hides it for reduced-motion preferences', () => {
+test('hero uses the local video and GIF with the configured deployment base', () => {
   const source = read('src/components/Hero.astro');
-  assert.match(source, /<video class="hero-video" autoplay loop muted playsinline poster="\/assets\/videos\/hero-bg\.mp4">/);
-  assert.match(source, /<source src="\/assets\/videos\/hero-bg\.mp4" type="video\/mp4">/);
-  assert.match(source, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.hero-video \{\s*display: none;/);
+  assert.match(source, /import\.meta\.env\.BASE_URL/);
+  assert.match(source, /hero-bg\.mp4/);
+  assert.match(source, /hero-[\w-]+\.gif/);
   assert.ok(existsSync(new URL('../public/assets/videos/hero-bg.mp4', import.meta.url)));
+  assert.ok(existsSync(new URL('../public/assets/videos/hero-fallback.gif', import.meta.url)));
+});
+
+test('hero hides both animated media for reduced-motion preferences', () => {
+  const source = read('src/components/Hero.astro');
+  const reducedMotion = source.split('@media (prefers-reduced-motion: reduce)')[1];
+  assert.ok(reducedMotion);
+  assert.match(reducedMotion, /\.hero-video/);
+  assert.match(reducedMotion, /\.hero-fallback/);
+  assert.match(reducedMotion, /display:\s*none/);
 });
 test('all translation dictionaries compile without syntax errors', () => {
   const result = ts.transpileModule(read('src/i18n/locales.ts'), {

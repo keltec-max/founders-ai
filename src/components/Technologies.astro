@@ -76,9 +76,9 @@ const categories = [
           <h3 data-i18n={`tech.cat.${category.key}.title`}>{category.title}</h3>
           <ul role="list" class="tech-items">
             {category.items.map((item, i) => (
-              <li class="tech-item" data-i18n={`tech.cat.${category.key}.items.${i}`}>
+              <li class="tech-item">
                 <span class="tech-logo" set:html={item.logo}></span>
-                <span class="tech-name">{item.name}</span>
+                <span class="tech-name" data-i18n={`tech.cat.${category.key}.items.${i}`}>{item.name}</span>
               </li>
             ))}
           </ul>
