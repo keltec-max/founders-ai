@@ -13,13 +13,11 @@ test('technology items include inline logos and translated names', () => {
   assert.match(source, /<span class="tech-name">\{item\.name\}<\/span>/);
 });
 
-test('contact section explains that no contact channel is active', () => {
+test('contact section keeps unverified channels unpublished', () => {
   const source = read('src/components/Contact.astro');
-  assert.match(source, /data-i18n="contact\.title">/);
-  assert.match(source, /https:\/\/github\.com\/keltec-max\/founders-ai/);
-  assert.doesNotMatch(source, /<form\b|mailto:|wa\.me/i);
+  assert.match(source, /contact\.title/);
+  assert.doesNotMatch(source, /<form\b|mailto:|wa\.me|contato@founders-ai\.com|3000-0000|linkedin\.com\/company\/founders-ai/i);
 });
-
 test('hero video is local and hidden for reduced-motion preferences', () => {
   const source = read('src/components/Hero.astro');
   assert.match(source, /<video class="hero-video" autoplay loop muted playsinline poster="\/assets\/videos\/hero-bg\.mp4">/);
