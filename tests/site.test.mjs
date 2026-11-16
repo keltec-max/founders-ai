@@ -31,6 +31,8 @@ describe('Founders AI - Build Verification Tests', () => {
   let allCss;
   let navHtml;
   let contatoSection;
+  let heroSection;
+  let techSection;
 
   before(() => {
     indexHtml = readFileSync(join(DIST_DIR, 'index.html'), 'utf-8');
@@ -40,6 +42,10 @@ describe('Founders AI - Build Verification Tests', () => {
     navHtml = navMatch ? navMatch[0] : '';
     const contatoMatch = indexHtml.match(/id=["']?contato["']?[^]*?(?=<section|<footer|<\/main|$)/i);
     contatoSection = contatoMatch ? contatoMatch[0] : '';
+    const heroMatch = indexHtml.match(/<section[\s\S]*?aria-labelledby=["']?hero-title["']?[\s\S]*?<\/section>/i);
+    heroSection = heroMatch ? heroMatch[0] : '';
+    const techMatch = indexHtml.match(/<section[\s\S]*?aria-labelledby=["']?tech-title["']?[\s\S]*?<\/section>/i);
+    techSection = techMatch ? techMatch[0] : '';
   });
 
   describe('HTML Structure', () => {
@@ -227,6 +233,110 @@ describe('Founders AI - Build Verification Tests', () => {
         /animation\s*:\s*none/i.test(blockContent) || /transition\s*:\s*none/i.test(blockContent),
         'Should disable animations/transitions in prefers-reduced-motion'
       );
+    });
+  });
+
+  describe('Hero Video', () => {
+    test('hero section has video element', () => {
+      assert.ok(/<video\b/i.test(heroSection), 'Hero section should contain a <video> element');
+    });
+
+    test('hero video has source pointing to /founders-ai/videos/hero.mp4', () => {
+      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
+      assert.ok(videoMatch, 'Should have a video element');
+      const videoHtml = videoMatch[0];
+      assert.ok(/src=["']?\/founders-ai\/videos\/hero\.mp4["']?/i.test(videoHtml), 'Video should have source src="/founders-ai/videos/hero.mp4"');
+    });
+
+    test('hero video has muted attribute', () => {
+      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
+      assert.ok(videoMatch, 'Should have a video element');
+      const videoHtml = videoMatch[0];
+      assert.ok(/\bmuted\b/i.test(videoHtml), 'Video should have muted attribute');
+    });
+
+    test('hero video has loop attribute', () => {
+      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
+      assert.ok(videoMatch, 'Should have a video element');
+      const videoHtml = videoMatch[0];
+      assert.ok(/\bloop\b/i.test(videoHtml), 'Video should have loop attribute');
+    });
+
+    test('hero video has playsinline attribute', () => {
+      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
+      assert.ok(videoMatch, 'Should have a video element');
+      const videoHtml = videoMatch[0];
+      assert.ok(/\bplaysinline\b/i.test(videoHtml), 'Video should have playsinline attribute');
+    });
+
+    test('hero video has poster attribute', () => {
+      const videoMatch = heroSection.match(/<video[\s\S]*?<\/video>/i);
+      assert.ok(videoMatch, 'Should have a video element');
+      const videoHtml = videoMatch[0];
+      assert.ok(/poster=["'][^"']+["']/i.test(videoHtml), 'Video should have poster attribute');
+    });
+
+    test('hero has accessible pause button outside aria-hidden', () => {
+      // Pause button should exist and NOT be inside an element with aria-hidden="true"
+      const pauseButtonMatch = indexHtml.match(/<button[^>]*>[^<]*paus[^<]*<\/button>/i) || indexHtml.match(/<button[^>]*aria-label=["'][^"']*paus[^"']*["'][^>]*>/i);
+      assert.ok(pauseButtonMatch, 'Should have a pause button for the video');
+      const pauseButton = pauseButtonMatch[0];
+      assert.ok(/aria-label=["'][^"']+["']/i.test(pauseButton), 'Pause button should have accessible aria-label');
+      // Check pause button is not inside aria-hidden="true"
+      const ariaHiddenSections = indexHtml.match(/<[^>]*aria-hidden=["']?true["']?[\s\S]*?<\/[^>]*>/gi) || [];
+      let pauseButtonInAriaHidden = false;
+      for (const section of ariaHiddenSections) {
+        if (section.includes(pauseButton) || pauseButton.includes('pause') || pauseButton.includes('paus')) {
+          pauseButtonInAriaHidden = true;
+          break;
+        }
+      }
+      assert.ok(!pauseButtonInAriaHidden, 'Pause button should not be inside aria-hidden="true"');
+    });
+  });
+
+  describe('Technology Logos', () => {
+    test('tecnologias section has 15 local logo images', () => {
+      const imgMatches = techSection.match(/<img\b[^>]*>/gi) || [];
+      assert.strictEqual(imgMatches.length, 15, 'Should have exactly 15 logo images in tecnologias section');
+    });
+
+    test('each technology logo has data-i18n on adjacent span for non-li text', () => {
+      // Each li should contain an img and a span with data-i18n
+      const liMatches = techSection.match(/<li[\s\S]*?<\/li>/gi) || [];
+      let logosWithI18n = 0;
+      for (const li of liMatches) {
+        const imgMatch = li.match(/<img\b[^>]*>/i);
+        const spanMatch = li.match(/<span[^>]*data-i18n=["'][^"']+["'][^>]*>[\s\S]*?<\/span>/i);
+        if (imgMatch && spanMatch) {
+          logosWithI18n++;
+        }
+      }
+      assert.strictEqual(logosWithI18n, 15, 'All 15 logos should have adjacent span with data-i18n for non-li text');
+    });
+
+    test('technology logo image files exist in public or dist', () => {
+      // Check that the referenced logo image files exist
+      const imgSrcMatches = techSection.match(/src=["']?([^"']+)["']?/gi) || [];
+      for (const srcMatch of imgSrcMatches) {
+        const src = srcMatch.replace(/src=["']?/i, '').replace(/["']?$/, '');
+        // Convert /founders-ai/ path to public/ path
+        let filePath;
+        if (src.startsWith('/founders-ai/')) {
+          filePath = join(DIST_DIR, src.replace('/founders-ai/', ''));
+        } else {
+          filePath = join(DIST_DIR, src);
+        }
+        // Check if file exists
+        let exists = false;
+        try {
+          readFileSync(filePath);
+          exists = true;
+        } catch {
+          exists = false;
+        }
+        assert.ok(exists, `Logo image file should exist: ${filePath}`);
+      }
     });
   });
 });

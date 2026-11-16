@@ -1,9 +1,61 @@
 ---
+// SVG Logos - definidos antes do array categories
+const copilotLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0078D4"/><path d="M16 8L10 14H22L16 8Z" fill="white"/><path d="M16 18L10 24H22L16 18Z" fill="white" opacity="0.6"/></svg>`;
+const chatgptLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#10A37F"/><path d="M16 7C11.03 7 7 11.03 7 16C7 20.97 11.03 25 16 25C20.97 25 25 20.97 25 16C25 11.03 20.97 7 16 7ZM16 23C12.14 23 9 19.86 9 16C9 12.14 12.14 9 16 9C19.86 9 23 12.14 23 16C23 19.86 19.86 23 16 23Z" fill="white"/><path d="M16 10.5C14.35 10.5 13 11.85 13 13.5C13 15.15 14.35 16.5 16 16.5C17.65 16.5 19 15.15 19 13.5C19 11.85 17.65 10.5 16 10.5ZM16 12.5C14.6 12.5 13.5 13.6 13.5 15C13.5 16.4 14.6 17.5 16 17.5C17.4 17.5 18.5 16.4 18.5 15C18.5 13.6 17.4 12.5 16 12.5Z" fill="#10A37F"/></svg>`;
+const claudeLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#D97757"/><path d="M16 6C10.48 6 6 10.48 6 16C6 21.52 10.48 26 16 26C21.52 26 26 21.52 26 16C26 10.48 21.52 6 16 6ZM16 24C11.59 24 8 20.41 8 16C8 11.59 11.59 8 16 8C20.41 8 24 11.59 24 16C24 20.41 20.41 24 16 24Z" fill="white"/><path d="M12.5 12.5L19.5 19.5M19.5 12.5L12.5 19.5" stroke="#D97757" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+const llamaLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0095FF"/><path d="M10 22L16 10L22 22H10Z" fill="white"/><path d="M14 22V14M18 22V14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`;
+const azureLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0078D4"/><path d="M16 8L10 14H22L16 8Z" fill="white"/><path d="M16 18L10 24H22L16 18Z" fill="white" opacity="0.6"/></svg>`;
+const awsLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#FF9900"/><path d="M8 20L16 12L24 20H8Z" fill="white"/><path d="M10 20L16 15L22 20H10Z" fill="#FF9900"/></svg>`;
+const gcpLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#4285F4"/><path d="M16 8C11.58 8 8 11.58 8 16C8 20.42 11.58 24 16 24C20.42 24 24 20.42 24 16C24 11.58 20.42 8 16 8ZM16 22C12.69 22 10 19.31 10 16C10 12.69 12.69 10 16 10C19.31 10 22 12.69 22 16C22 19.31 19.31 22 16 22Z" fill="white"/><path d="M16 12C13.79 12 12 13.79 12 16C12 18.21 13.79 20 16 20C18.21 20 20 18.21 20 16C20 13.79 18.21 12 16 12Z" fill="#4285F4"/><path d="M16 14C14.9 14 14 14.9 14 16C14 17.1 14.9 18 16 18C17.1 18 18 17.1 18 16C18 14.9 17.1 14 16 14Z" fill="white"/></svg>`;
+const linuxLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#FCC624"/><path d="M16 6C10.48 6 6 10.48 6 16C6 21.52 10.48 26 16 26C21.52 26 26 21.52 26 16C26 10.48 21.52 6 16 6ZM16 24C11.59 24 8 20.41 8 16C8 11.59 11.59 8 16 8C20.41 8 24 11.59 24 16C24 20.41 20.41 24 16 24Z" fill="white"/><path d="M16 10L10 16H22L16 10Z" fill="#FCC624"/></svg>`;
+const vmwareLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#607078"/><path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" fill="white"/><path d="M16 10L10 14L16 18L22 14L16 10Z" fill="#607078"/></svg>`;
+const k8sLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#326CE5"/><path d="M16 6L8 12L16 18L24 12L16 6Z" fill="white"/><path d="M16 10L10 14L16 18L22 14L16 10Z" fill="#326CE5"/></svg>`;
+const terraformLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#7B42BC"/><path d="M16 8L10 14H22L16 8Z" fill="white"/><path d="M16 18L10 24H22L16 18Z" fill="white" opacity="0.6"/></svg>`;
+const ansibleLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#EE0000"/><path d="M16 8C11.58 8 8 11.58 8 16C8 20.42 11.58 24 16 24C20.42 24 24 20.42 24 16C24 11.58 20.42 8 16 8ZM16 22C12.69 22 10 19.31 10 16C10 12.69 12.69 10 16 10C19.31 10 22 12.69 22 16C22 19.31 19.31 22 16 22Z" fill="white"/><path d="M16 12C13.79 12 12 13.79 12 16C12 18.21 13.79 20 16 20C18.21 20 20 18.21 20 16C20 13.79 18.21 12 16 12Z" fill="#EE0000"/><path d="M16 14C14.9 14 14 14.9 14 16C14 17.1 14.9 18 16 18C17.1 18 18 17.1 18 16C18 14.9 17.1 14 16 14Z" fill="white"/></svg>`;
+const grafanaLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#F46800"/><path d="M10 22V14M16 22V10M22 22V18" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+const prometheusLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#E6522C"/><path d="M16 8L10 14H22L16 8Z" fill="white"/><circle cx="16" cy="20" r="3" fill="white"/></svg>`;
+const datadogLogo = `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#632CA6"/><path d="M16 8C11.58 8 8 11.58 8 16C8 20.42 11.58 24 16 24C20.42 24 24 20.42 24 16C24 11.58 20.42 8 16 8ZM16 22C12.69 22 10 19.31 10 16C10 12.69 12.69 10 16 10C19.31 10 22 12.69 22 16C22 19.31 19.31 22 16 22Z" fill="white"/><path d="M16 12C13.79 12 12 13.79 12 16C12 18.21 13.79 20 16 20C18.21 20 20 18.21 20 16C20 13.79 18.21 12 16 12Z" fill="#632CA6"/><path d="M16 14C14.9 14 14 14.9 14 16C14 17.1 14.9 18 16 18C17.1 18 18 17.1 18 16C18 14.9 17.1 14 16 14Z" fill="white"/></svg>`;
+
 const categories = [
-  { key: 'ai', title: 'Inteligência artificial', items: ['Microsoft Copilot', 'ChatGPT', 'Claude', 'Llama'] },
-  { key: 'cloud', title: 'Cloud', items: ['Microsoft Azure', 'AWS', 'Google Cloud'] },
-  { key: 'infra', title: 'Infraestrutura & automação', items: ['Linux', 'VMware', 'Kubernetes', 'Terraform', 'Ansible'] },
-  { key: 'obs', title: 'Observabilidade', items: ['Grafana', 'Prometheus', 'Datadog'] },
+  {
+    key: 'ai',
+    title: 'Inteligência artificial',
+    items: [
+      { name: 'Microsoft Copilot', logo: copilotLogo },
+      { name: 'ChatGPT', logo: chatgptLogo },
+      { name: 'Claude', logo: claudeLogo },
+      { name: 'Llama', logo: llamaLogo },
+    ]
+  },
+  {
+    key: 'cloud',
+    title: 'Cloud',
+    items: [
+      { name: 'Microsoft Azure', logo: azureLogo },
+      { name: 'AWS', logo: awsLogo },
+      { name: 'Google Cloud', logo: gcpLogo },
+    ]
+  },
+  {
+    key: 'infra',
+    title: 'Infraestrutura & automação',
+    items: [
+      { name: 'Linux', logo: linuxLogo },
+      { name: 'VMware', logo: vmwareLogo },
+      { name: 'Kubernetes', logo: k8sLogo },
+      { name: 'Terraform', logo: terraformLogo },
+      { name: 'Ansible', logo: ansibleLogo },
+    ]
+  },
+  {
+    key: 'obs',
+    title: 'Observabilidade',
+    items: [
+      { name: 'Grafana', logo: grafanaLogo },
+      { name: 'Prometheus', logo: prometheusLogo },
+      { name: 'Datadog', logo: datadogLogo },
+    ]
+  },
 ];
 ---
 <section id="tecnologias" class="section tech-section" aria-labelledby="tech-title">
@@ -19,9 +71,12 @@ const categories = [
       {categories.map((category) => (
         <div class="tech-row">
           <h3 data-i18n={`tech.cat.${category.key}.title`}>{category.title}</h3>
-          <ul role="list">
+          <ul role="list" class="tech-items">
             {category.items.map((item, i) => (
-              <li data-i18n={`tech.cat.${category.key}.items.${i}`}>{item}</li>
+              <li class="tech-item" data-i18n={`tech.cat.${category.key}.items.${i}`}>
+                <span class="tech-logo" set:html={item.logo}></span>
+                <span class="tech-name">{item.name}</span>
+              </li>
             ))}
           </ul>
         </div>
@@ -30,3 +85,64 @@ const categories = [
     <p class="tech-disclaimer" data-i18n="tech.disclaimer">Tecnologias de referência. As marcas citadas pertencem aos seus respectivos titulares e não representam vínculo de parceria ou certificação.</p>
   </div>
 </section>
+
+<style>
+  .tech-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .tech-row h3 {
+    font-size: .87rem;
+    color: var(--color-muted);
+  }
+  .tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .tech-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 500 1.05rem var(--font-heading);
+    color: var(--color-text);
+    transition: color 0.2s;
+  }
+  .tech-item:hover {
+    color: var(--color-gold);
+  }
+  .tech-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .tech-logo svg {
+    width: 100%;
+    height: 100%;
+  }
+  .tech-disclaimer {
+    font-size: .7rem;
+    color: var(--color-muted);
+    margin-top: 22px;
+  }
+  @media (max-width: 760px) {
+    .tech-row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .tech-row ul {
+      gap: 12px 22px;
+      font-size: 1rem;
+    }
+  }
+</style>

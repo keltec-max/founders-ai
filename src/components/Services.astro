@@ -57,6 +57,7 @@ const services = [
     <div class="service-grid">
       {services.map((service) => (
         <article class="service-card">
+          <div class="service-card-border" aria-hidden="true"></div>
           <div class="service-top">
             <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -75,3 +76,148 @@ const services = [
     </div>
   </div>
 </section>
+
+<style>
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .service-card {
+    position: relative;
+    padding: 30px;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .service-card:first-child {
+    border-color: #6c5a37;
+    background: linear-gradient(135deg, #24221a, #151719 65%);
+  }
+  .service-card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  .service-card-border::before,
+  .service-card-border::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    border: 2px solid var(--color-gold);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .service-card-border::before {
+    clip-path: polygon(0 0, 100% 0, 100% 3px, 0 3px);
+    transform: translateX(-100%);
+    animation: border-slide-h 2s linear infinite;
+  }
+  .service-card-border::after {
+    clip-path: polygon(0 100%, 100% 100%, 100% calc(100% - 3px), 0 calc(100% - 3px));
+    transform: translateX(100%);
+    animation: border-slide-h-reverse 2s linear infinite;
+  }
+  .service-card:hover .service-card-border::before,
+  .service-card:hover .service-card-border::after {
+    opacity: 1;
+  }
+  .service-card::before,
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    border-left: 2px solid var(--color-gold);
+    border-right: 2px solid var(--color-gold);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .service-card::before {
+    clip-path: polygon(0 0, 3px 0, 3px 100%, 0 100%);
+    transform: translateY(-100%);
+    animation: border-slide-v 2s linear infinite;
+  }
+  .service-card::after {
+    clip-path: polygon(100% 0, calc(100% - 3px) 0, calc(100% - 3px) 100%, 100% 100%);
+    transform: translateY(100%);
+    animation: border-slide-v-reverse 2s linear infinite;
+  }
+  .service-card:hover::before,
+  .service-card:hover::after {
+    opacity: 1;
+  }
+  @keyframes border-slide-h {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  @keyframes border-slide-h-reverse {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  @keyframes border-slide-v {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes border-slide-v-reverse {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+  }
+  .service-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 38px;
+  }
+  .service-top svg {
+    width: 30px;
+    height: 30px;
+    color: var(--color-gold);
+  }
+  .service-number {
+    font: .68rem monospace;
+    color: var(--color-muted);
+  }
+  .service-card > p {
+    color: var(--color-muted);
+    margin-top: 16px;
+    font-size: .88rem;
+  }
+  .service-card ul {
+    padding: 21px 0 0;
+    margin: 24px 0 0;
+    list-style: none;
+    border-top: 1px solid var(--color-line);
+  }
+  .service-card li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: #c9cbc9;
+    font-size: .8rem;
+    margin-block: 10px;
+  }
+  .service-card li::before {
+    content: '+';
+    color: var(--color-gold);
+  }
+  @media (max-width: 1050px) {
+    .service-card { padding: 22px; }
+  }
+  @media (max-width: 760px) {
+    .service-grid { grid-template-columns: 1fr; }
+    .service-top { margin-bottom: 26px; }
+    .service-card { padding: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .service-card-border::before,
+    .service-card-border::after,
+    .service-card::before,
+    .service-card::after {
+      animation: none !important;
+    }
+  }
+</style>
