@@ -64,7 +64,7 @@ export const translations: Record<Lang, Dict> = {
     'services.05.items.1': 'Feature stores e MLOps',
     'services.05.items.2': 'Streaming e BI executivo',
     'services.06.title': 'Segurança & Compliance IA',
-    'services.06.desc:
+    'services.06.desc':
       'Red teaming para LLMs, guardrails, prevenção de vazamento de dados e conformidade com LGPD, GDPR e AI Act.',
     'services.06.items.0': 'AI red teaming e guardrails',
     'services.06.items.1': 'Prevenção de vazamento (DLP)',
@@ -192,7 +192,7 @@ export const translations: Record<Lang, Dict> = {
     'services.05.items.1': 'Feature stores and MLOps',
     'services.05.items.2': 'Streaming and executive BI',
     'services.06.title': 'AI Security & Compliance',
-    'services.06.desc:
+    'services.06.desc':
       'Red teaming for LLMs, guardrails, data leak prevention and compliance with LGPD, GDPR and AI Act.',
     'services.06.items.0': 'AI red teaming and guardrails',
     'services.06.items.1': 'Data leak prevention (DLP)',
@@ -296,31 +296,31 @@ export const translations: Record<Lang, Dict> = {
     'services.01.items.1': 'Technischer und finanzieller Fahrplan',
     'services.01.items.2': 'Governance, Ethik und Compliance',
     'services.02.title': 'Implementierung Generative KI',
-    'services.02.desc:
+    'services.02.desc':
       'Bereitstellung von Copilot, ChatGPT Enterprise, Claude und Open-Source-Modellen, mit RAG, Agenten und Integration in Legacy-Systeme.',
     'services.02.items.0': 'Copilot, ChatGPT Enterprise, Claude',
     'services.02.items.1': 'RAG und private Wissensdatenbanken',
     'services.02.items.2': 'Feinabstimmung und benutzerdefinierte Modelle',
     'services.03.title': 'Infrastruktur & Server',
-    'services.03.desc:
+    'services.03.desc':
       'Rechenzentren, GPU/HPC-Cluster für Training, NVMe/all-flash-Speicher, Backup und Netzwerke mit geringer Latenz.',
     'services.03.items.0': 'Rechenzentren und HPC/GPU-Cluster',
     'services.03.items.1': 'NVMe-Speicher und Backup',
     'services.03.items.2': 'IaC (Terraform, Ansible) und GitOps',
     'services.04.title': 'Hybrid Cloud & Kubernetes',
-    'services.04.desc:
+    'services.04.desc':
       'Hybridarchitektur on-prem + Cloud (AWS, Azure, GCP), Kubernetes, Workload-Migration, FinOps und Disaster Recovery.',
     'services.04.items.0': 'Hybrid- und Edge-Architektur',
     'services.04.items.1': 'Kubernetes (EKS, AKS, GKE)',
     'services.04.items.2': 'FinOps und Disaster Recovery',
     'services.05.title': 'Data Engineering & MLOps',
-    'services.05.desc:
+    'services.05.desc':
       'Echtzeit-Datenpipelines, Data Lakes, Feature Stores, Streaming und Executive Dashboards.',
     'services.05.items.0': 'Data Lakes und Lakehouses',
     'services.05.items.1': 'Feature Stores und MLOps',
     'services.05.items.2': 'Streaming und Executive BI',
     'services.06.title': 'KI-Sicherheit & Compliance',
-    'services.06.desc:
+    'services.06.desc':
       'Red Teaming für LLMs, Guardrails, Datenleckvermeidung und Compliance mit LGPD, GDPR und KI-Verordnung.',
     'services.06.items.0': 'KI Red Teaming und Guardrails',
     'services.06.items.1': 'Vermeidung von Datenlecks (DLP)',
@@ -373,7 +373,7 @@ export const translations: Record<Lang, Dict> = {
     'contact.desc':
       'Der Kontaktkanal wird eingerichtet. Diese Institutionsseite sammelt keine Daten und hat aktuell kein aktives Formular.',
     'contact.more.title': 'Mehr erfahren?',
-    'contact.more.desc:
+    'contact.more.desc':
       'Folgen Sie dem Projekt auf GitHub. Wenn der Kontaktkanal verfügbar ist, wird dieser Bereich mit Kontaktmöglichkeiten aktualisiert.',
     'contact.more.link': 'GitHub-Repository →',
     'contact.status.title': 'Kontaktstatus',
@@ -424,31 +424,31 @@ export const translations: Record<Lang, Dict> = {
     'services.01.items.1': 'Hoja de ruta técnica y financiera',
     'services.01.items.2': 'Gobernanza, ética y cumplimiento',
     'services.02.title': 'Implementación de IA generativa',
-    'services.02.desc:
+    'services.02.desc':
       'Despliegue de Copilot, ChatGPT Enterprise, Claude y modelos de código abierto, con RAG, agentes e integración con sistemas legados.',
     'services.02.items.0': 'Copilot, ChatGPT Enterprise, Claude',
     'services.02.items.1': 'RAG y bases de conocimiento privadas',
     'services.02.items.2': 'Fine-tuning y modelos personalizados',
     'services.03.title': 'Infraestructura y servidores',
-    'services.03.desc:
+    'services.03.desc':
       'Centros de datos, clústeres GPU/HPC para entrenamiento, almacenamiento NVMe/all-flash, backup y redes de baja latencia.',
     'services.03.items.0': 'Centros de datos y clústeres HPC/GPU',
     'services.03.items.1': 'Almacenamiento NVMe y backup',
     'services.03.items.2': 'IaC (Terraform, Ansible) y GitOps',
     'services.04.title': 'Nube híbrida y Kubernetes',
-    'services.04.desc:
+    'services.04.desc':
       'Arquitectura híbrida on-prem + nube (AWS, Azure, GCP), Kubernetes, migración de cargas de trabajo, FinOps y recuperación ante desastres.',
     'services.04.items.0': 'Arquitectura híbrida y edge',
     'services.04.items.1': 'Kubernetes (EKS, AKS, GKE)',
     'services.04.items.2': 'FinOps y recuperación ante desastres',
     'services.05.title': 'Ingeniería de datos y MLOps',
-    'services.05.desc:
+    'services.05.desc':
       'Canalizaciones de datos en tiempo real, data lakes, almacenes de características, streaming y paneles ejecutivos.',
     'services.05.items.0': 'Data lakes y lakehouses',
     'services.05.items.1': 'Almacenes de características y MLOps',
     'services.05.items.2': 'Streaming y BI ejecutivo',
     'services.06.title': 'Seguridad y cumplimiento de IA',
-    'services.06.desc:
+    'services.06.desc':
       'Red teaming para LLMs, guardrails, prevención de filtración de datos y cumplimiento con LGPD, GDPR y la Ley de IA.',
     'services.06.items.0': 'Red teaming de IA y guardrails',
     'services.06.items.1': 'Prevención de filtración de datos (DLP)',
@@ -473,7 +473,7 @@ export const translations: Record<Lang, Dict> = {
     'about.process.04.desc': 'Monitoreamos el uso, ajustamos modelos y mantenemos la operación segura.',
     'tech.eyebrow': '03 / Ecosistema tecnológico',
     'tech.title': 'La herramienta adecuada.<br /><span class="muted">Para tu escenario.</span>',
-    'tech.desc:
+    'tech.desc':
       'La elección empieza por el problema, no por el proveedor. Evaluamos las tecnologías según los requisitos de cada proyecto.',
     'tech.cat.ai.title': 'Inteligencia artificial',
     'tech.cat.ai.items.0': 'Microsoft Copilot',
@@ -498,10 +498,10 @@ export const translations: Record<Lang, Dict> = {
       'Tecnologías de referencia. Las marcas mencionadas pertenecen a sus respectivos titulares y no representan vínculo de asociación o certificación.',
     'contact.eyebrow': 'Contacto',
     'contact.title': 'En configuración',
-    'contact.desc:
+    'contact.desc':
       'El canal de contacto se está configurando. Esta página institucional no recopila datos y no tiene formulario activo en este momento.',
     'contact.more.title': '¿Quieres saber más?',
-    'contact.more.desc:
+    'contact.more.desc':
       'Sigue el proyecto en GitHub. Cuando el canal de contacto esté disponible, esta sección se actualizará con los medios de contacto.',
     'contact.more.link': 'repositorio en GitHub →',
     'contact.status.title': 'Estado del contacto',
