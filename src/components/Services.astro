@@ -19,7 +19,12 @@ const services = [
     title: 'Infraestrutura & Servidores',
     description:
       'Data centers, clusters GPU/HPC para treinamento, storage NVMe/all-flash, infraestrutura SAP HANA, backup e redes de baixa latência.',
-    items: ['Data centers e clusters HPC/GPU', 'Infraestrutura SAP HANA', 'Storage NVMe e backup', 'IaC (Terraform, Ansible) e GitOps'],
+    items: [
+      { text: 'Data centers e clusters HPC/GPU', logo: 'datacenter' },
+      { text: 'Infraestrutura SAP HANA', logo: 'sap' },
+      { text: 'Storage NVMe e backup', logo: 'storage' },
+      { text: 'IaC, Docker, GitOps', logo: 'docker' },
+    ],
   },
   {
     number: '04',
@@ -72,7 +77,16 @@ const services = [
           <div style="flex: 1" />
           <ul role="list">
             {service.items.map((item, i) => (
-              <li data-i18n={`services.${service.number}.items.${i}`}>{item}</li>
+              <li data-i18n={`services.${service.number}.items.${i}`}>
+                {typeof item === 'string' ? (
+                  item
+                ) : (
+                  <>
+                    <span class="service-item-logo" data-logo={item.logo} />
+                    {item.text}
+                  </>
+                )}
+              </li>
             ))}
           </ul>
         </article>
