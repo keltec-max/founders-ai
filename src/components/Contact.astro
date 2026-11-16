@@ -6,35 +6,73 @@
     <div class="section-heading">
       <div>
         <p class="eyebrow" data-i18n="contact.eyebrow">Contato</p>
-        <h2 id="contact-title" data-i18n="contact.title">Em configuração</h2>
+        <h2 id="contact-title" data-i18n="contact.title">Fale com Kelvin</h2>
       </div>
       <p data-i18n="contact.desc">
-        O canal de contato está sendo configurado. Esta página institucional não coleta dados e não possui formulário
-        ativo no momento.
+        Entre em contato direto pelo WhatsApp ou e-mail. Possuímos experiência com infraestrutura SAP HANA,
+        servidores críticos, cloud híbrida e adoção de inteligência artificial com governança.
       </p>
     </div>
+
     <div class="contact-panel">
       <div class="contact-copy">
-        <h2 data-i18n="contact.more.title">Quer saber mais?</h2>
-        <p data-i18n="contact.more.desc">
-          Acompanhe o projeto no GitHub. Quando o canal de contato estiver disponível, esta seção será atualizada com
-          os meios de alcance.
-        </p>
-        <a
-          href="https://github.com/keltec-max/founders-ai"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-link"
-          data-i18n="contact.more.link"
-          >repositório no GitHub <span aria-hidden="true">→</span></a
-        >
+        <h2 data-i18n="contact.more.title">Canais diretos</h2>
+        <ul role="list" class="channel-list">
+          <li class="channel-item whatsapp">
+            <a href="https://wa.me/5511978356178" target="_blank" rel="noopener noreferrer" class="channel-link">
+              <span class="channel-icon" aria-hidden="true">☎</span>
+              <span class="channel-value" data-i18n="contact.channels.whatsapp">WhatsApp: +55 11 97835-6178</span>
+            </a>
+          </li>
+          <li class="channel-item email">
+            <a href="mailto:kelvinlener@protonmail.ch" class="channel-link">
+              <span class="channel-icon" aria-hidden="true">✉</span>
+              <span class="channel-value" data-i18n="contact.channels.email">kelvinlener@protonmail.ch</span>
+            </a>
+          </li>
+          <li class="channel-item github">
+            <a href="https://github.com/keltec-max/founders-ai" target="_blank" rel="noopener noreferrer" class="channel-link">
+              <span class="channel-icon" aria-hidden="true">↗</span>
+              <span class="channel-value" data-i18n="contact.channels.github">repositório no GitHub</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="contact-expertise">
+          <h3 data-i18n="contact.expertise.title">Especialização em infraestrutura</h3>
+          <ul role="list" class="expertise-list">
+            <li data-i18n="contact.expertise.item0">Infraestrutura SAP HANA — servidores, storage e alta disponibilidade</li>
+            <li data-i18n="contact.expertise.item1">Cloud híbrida: AWS, Azure, Google Cloud</li>
+            <li data-i18n="contact.expertise.item2">Kubernetes, Terraform, Ansible e GitOps</li>
+            <li data-i18n="contact.expertise.item3">IA generativa: Copilot, ChatGPT Enterprise, Claude, Llama</li>
+            <li data-i18n="contact.expertise.item4">Observabilidade: Grafana, Prometheus, Datadog</li>
+          </ul>
+        </div>
       </div>
       <div class="contact-state">
-        <h3 data-i18n="contact.status.title">Status do contato</h3>
-        <p data-i18n="contact.status.no-data">Sem coleta de dados.</p>
-        <p data-i18n="contact.status.no-form">Não há formulário, telefone ou endereço publicados nesta versão.</p>
-        <p data-i18n="contact.status.update">Atualização prevista em breve.</p>
+        <h3 data-i18n="contact.status.title">Status</h3>
+        <p data-i18n="contact.status.active">Contato ativo. Resposta rápida via WhatsApp e e-mail.</p>
+        <p data-i18n="contact.location">São Paulo, SP — Brasil</p>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .channel-list { list-style: none; padding: 0; margin: 20px 0 30px; display: flex; flex-direction: column; gap: 14px; }
+  .channel-item { display: flex; align-items: center; gap: 12px; }
+  .channel-link { display: inline-flex; align-items: center; gap: 12px; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: color .2s; }
+  .channel-link:hover { color: var(--color-gold); }
+  .channel-icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--color-gold); flex-shrink: 0; }
+  .channel-value { color: var(--color-muted); word-break: break-all; }
+  .channel-link:hover .channel-value { color: var(--color-text); }
+
+  .contact-expertise { margin-top: 30px; padding-top: 25px; border-top: 1px solid var(--color-line); }
+  .contact-expertise h3 { font-size: 1rem; margin-bottom: 12px; color: var(--color-text); }
+  .expertise-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: .85rem; color: var(--color-muted); }
+  .expertise-list li { display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .expertise-list li::before { content: '▹'; color: var(--color-gold); font-size: .7rem; flex-shrink: 0; margin-top: 2px; }
+
+  .contact-state h3 { font-size: 1rem; margin-bottom: 10px; color: var(--color-text); }
+  .contact-state p { font-size: .85rem; color: var(--color-muted); margin-block: 8px 0; }
+</style>
