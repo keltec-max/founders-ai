@@ -7,16 +7,18 @@ const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf
 
 test('technology items include inline logos and translated names', () => {
   const source = read('src/components/Technologies.astro');
-  assert.equal((source.match(/\{ name: '[^']+', logo: \w+ \}/g) || []).length, 15);
+  assert.equal((source.match(/\{ name: '[^']+', logo: \w+ \}/g) || []).length, 16);
   assert.match(source, /<li class="tech-item" data-i18n=\{`tech\.cat\./);
   assert.match(source, /<span class="tech-logo" set:html=\{item\.logo\}><\/span>/);
   assert.match(source, /<span class="tech-name">\{item\.name\}<\/span>/);
 });
 
-test('contact section keeps unverified channels unpublished', () => {
+test('contact section lists the confirmed channels and SAP HANA expertise', () => {
   const source = read('src/components/Contact.astro');
-  assert.match(source, /contact\.title/);
-  assert.doesNotMatch(source, /<form\b|mailto:|wa\.me|contato@founders-ai\.com|3000-0000|linkedin\.com\/company\/founders-ai/i);
+  assert.match(source, /https:\/\/wa\.me\/5511978356178/);
+  assert.match(source, /mailto:kelvinlener@protonmail\.ch/);
+  assert.match(source, /Infraestrutura SAP HANA/);
+  assert.doesNotMatch(source, /contato@founders-ai\.com|3000-0000|linkedin\.com\/company\/founders-ai/i);
 });
 test('hero video is local and hidden for reduced-motion preferences', () => {
   const source = read('src/components/Hero.astro');

@@ -119,9 +119,10 @@ describe('Founders AI - Build Verification Tests', () => {
       );
     });
 
-    test('contact section is marked as under setup', () => {
+    test('contact section lists the confirmed email and WhatsApp channels', () => {
       assert.ok(/id=["']?contato["']?/i.test(indexHtml), 'Should have contact section with id="contato"');
-      assert.ok(/configuração/i.test(contatoSection), 'Contact section should state it is under setup ("configuração")');
+      assert.ok(/mailto:kelvinlener@protonmail\.ch/i.test(contatoSection), 'Should include the confirmed email channel');
+      assert.ok(/https:\/\/wa\.me\/5511978356178/i.test(contatoSection), 'Should include the confirmed WhatsApp channel');
     });
 
     test('has canonical URL set to https://keltec-max.github.io/founders-ai/', () => {
@@ -281,7 +282,8 @@ describe('Founders AI - Build Verification Tests', () => {
   describe('Technology Logos', () => {
     test('technology items have inline SVG logos and translated names', () => {
       const itemMatches = techSection.match(/<li\b[^>]*class=["']?tech-item["']?[^>]*>[\s\S]*?<\/li>/gi) || [];
-      assert.strictEqual(itemMatches.length, 15, 'Should have 15 technology items');
+      assert.strictEqual(itemMatches.length, 16, 'Should have 16 technology items including SAP HANA');
+      assert.ok(itemMatches.some((item) => /SAP HANA/.test(item)), 'Should include SAP HANA');
       for (const item of itemMatches) {
         assert.ok(/data-i18n=/i.test(item), 'Technology item should have a translation key');
         assert.ok(/<span[^>]*class=["']?tech-logo["']?[^>]*>\s*<svg/i.test(item), 'Technology item should contain an inline SVG logo');
