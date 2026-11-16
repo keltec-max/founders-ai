@@ -1,0 +1,20 @@
+{
+  "surface": "Landing page institucional Founders AI em Astro estático",
+  "job": "Entender os serviços e encontrar o contato",
+  "direction": "Grafite e dourado discreto; composição editorial técnica",
+  "primaryAction": "Conhecer serviços e acessar a seção de contato",
+  "hierarchy": ["Navegação", "Hero em duas colunas", "Serviços", "Sobre e abordagem", "Tecnologias", "Contato"],
+  "targetViewports": ["1440x900", "390x844"],
+  "constraints": ["Preservar IDs", "Sem alegações não comprovadas", "Sem overflow a 320px", "Navegação sem JavaScript", "Reduced motion", "Assets sob /founders-ai/"],
+  "reference": "Inspeção local: CSS ausente e SVG ocupando abertura sem texto visível",
+  "states": {
+    "loading": "Não aplicável: HTML estático sem dados assíncronos",
+    "empty": "Contato em configuração, sem coleta de dados",
+    "error": "Não aplicável: envio indisponível",
+    "partial": "Conteúdo disponível, contato explicitamente indisponível",
+    "success": "Não aplicável: sem transação",
+    "permission": "Não aplicável: página pública"
+  },
+  "plan": ["RED no build antigo", "CSS e base", "Componentes", "Build e testes", "QA visual e teclado", "Revisão independente"],
+  "publication": "Somente local, sem commit ou deploy"
+}

@@ -1,172 +1,575 @@
 ---
-interface Props {
-  title: string
-  description?: string
-  image?: string
-}
+import '../styles/global.css';
+import LanguageSelector from '../components/LanguageSelector.astro';
 
-const { title, description = "Founders AI - Consultoria especializada em Inteligência Artificial, Infraestrutura de Servidores e Soluções Corporativas", image = "/og-image.jpg" } = Astro.props
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#020617" />
-
-    <!-- Open Graph -->
+    <meta name="theme-color" content="#0d0f11" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:locale" content="pt_BR" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
-
-    <!-- Preconnect for external resources -->
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pt_BR" data-i18n="og.locale" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="manifest" href={`${base}manifest.json`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-
-    <!-- Security headers via meta -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-
-    <!-- Import global styles -->
-    <script is:inline>
-      // Prevent FOUC
-      document.documentElement.classList.add('js-enabled')
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-slate-950 text-slate-100 font-inter antialiased">
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-gold-500 focus:text-slate-950 focus:rounded-lg focus:font-semibold">
-      Pular para o conteúdo principal
-    </a>
-
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="skip.link">Pular para o conteúdo principal</a>
+    <header class="site-header" id="inicio">
+      <div class="container header-inner">
+        <a class="brand" href={base} aria-label="Founders AI — início">
+          <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M5 27V5h23M5 16h18M14 27V14" stroke="#d6b779" stroke-width="3" />
+          </svg>
+          <span>founders<em> ai</em></span>
+        </a>
+        <nav class="primary-nav" aria-label="Navegação principal">
+          <a href="#servicos" data-i18n="nav.servicos">Serviços</a>
+          <a href="#sobre" data-i18n="nav.sobre">Sobre</a>
+          <a href="#tecnologias" data-i18n="nav.tecnologias">Tecnologias</a>
+          <a class="nav-contact" href="#contato" data-i18n="nav.contato">Contato <span aria-hidden="true">↗</span></a>
+        </nav>
+        <LanguageSelector />
+      </div>
+    </header>
     <slot />
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/50 bg-slate-950/80 backdrop-blur-sm" role="contentinfo">
-      <div class="container-custom py-12 lg:py-16">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
-          <!-- Brand -->
-          <div class="md:col-span-2 lg:col-span-1">
-            <a href="/" class="flex items-center gap-3" aria-label="Founders AI - Início">
-              <span class="text-3xl font-bold text-gradient-gold font-space-grotesk" aria-hidden="true">F</span>
-              <span class="text-xl font-bold text-slate-100 font-space-grotesk">Founders AI</span>
-            </a>
-            <p class="mt-4 text-slate-400 text-sm leading-relaxed max-w-xs">
-              Transformamos desafios corporativos em vantagens competitivas através de Inteligência Artificial e infraestrutura de ponta.
-            </p>
-            <div class="mt-6 flex gap-4" role="list" aria-label="Redes sociais">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-gold-500 transition-colors" aria-label="LinkedIn">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-gold-500 transition-colors" aria-label="GitHub">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              </a>
-              <a href="mailto:contato@founders.ai" class="text-slate-400 hover:text-gold-500 transition-colors" aria-label="E-mail">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </a>
-            </div>
-          </div>
-
-          <!-- Links rápidos -->
-          <nav aria-label="Links rápidos">
-            <h3 class="font-semibold text-gold-400 mb-4">Navegação</h3>
-            <ul class="space-y-2" role="list">
-              <li><a href="#sobre" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Sobre nós</a></li>
-              <li><a href="#servicos" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Serviços</a></li>
-              <li><a href="#tecnologias" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Tecnologias</a></li>
-              <li><a href="#contato" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Contato</a></li>
-            </ul>
-          </nav>
-
-          <!-- Serviços -->
-          <nav aria-label="Nossos serviços">
-            <h3 class="font-semibold text-gold-400 mb-4">Serviços</h3>
-            <ul class="space-y-2" role="list">
-              <li><a href="#servicos" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Consultoria em IA</a></li>
-              <li><a href="#servicos" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Infraestrutura & Servidores</a></li>
-              <li><a href="#servicos" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Planejamento Estratégico</a></li>
-              <li><a href="#servicos" class="text-slate-400 hover:text-gold-500 transition-colors text-sm">Implementação & Treinamento</a></li>
-            </ul>
-          </nav>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="#inicio">founders<em>ai</em></a>
+          <p data-i18n="footer.copy">Inteligência aplicada. Infraestrutura bem construída.</p>
         </div>
-
-        <div class="mt-12 pt-8 border-t border-slate-800/50">
-          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-slate-500 text-sm">
-              © {new Date().getFullYear()} Founders AI. Todos os direitos reservados.
-            </p>
-            <div class="flex gap-6 text-sm text-slate-500">
-              <a href="/privacidade" class="hover:text-gold-500 transition-colors">Política de Privacidade</a>
-              <a href="/termos" class="hover:text-gold-500 transition-colors">Termos de Uso</a>
-            </div>
-          </div>
+        <div class="footer-bottom">
+          <p>© {new Date().getFullYear()} <span data-i18n="footer.brand">Founders AI.</span><br /><span data-i18n="footer.consulting">Consultoria em IA e infraestrutura.</span></p>
+          <a class="footer-link" href="#inicio" data-i18n="footer.voltar">Voltar ao topo ↑</a>
         </div>
       </div>
     </footer>
+    <script type="module">
+      const STORAGE_KEY = 'founders-lang';
+      const DEFAULT_LANG = 'pt';
+      const VALID_LANGS = ['pt', 'en', 'de', 'es'];
+      const LANG_HTML = { pt: 'pt-BR', en: 'en-US', de: 'de-DE', es: 'es-ES' };
 
-    <!-- Scripts -->
-    <script is:inline src="/scripts/main.js"></script>
+      const translations = {
+        pt: {
+          'skip.link': 'Pular para o conteúdo principal',
+          'og.locale': 'pt_BR',
+          'nav.servicos': 'Serviços',
+          'nav.sobre': 'Sobre',
+          'nav.tecnologias': 'Tecnologias',
+          'nav.contato': 'Contato',
+          'footer.copy': 'Inteligência aplicada. Infraestrutura bem construída.',
+          'footer.consulting': 'Consultoria em IA e infraestrutura.',
+          'footer.brand': 'Founders AI.',
+          'footer.voltar': 'Voltar ao topo ↑',
+          'hero.eyebrow': 'Consultoria de inteligência artificial e infraestrutura',
+          'hero.title': 'IA aplicada <em class="accent">com infraestrutura de confiança</em>',
+          'hero.desc': 'Ajudamos empresas a adotar Copilot, ChatGPT Enterprise, Claude e modelos open-source com governança, servidores adequados e implantação em escala — da estratégia ao ambiente de produção.',
+          'hero.btn-iniciar': 'Iniciar projeto',
+          'hero.btn-servicos': 'Ver serviços',
+          'hero.visual.ia01': 'ia-01',
+          'hero.visual.ativo': 'ativo',
+          'hero.visual.producao': 'produção',
+          'hero.visual.infra': 'infra',
+          'hero.visual.cloud': 'cloud',
+          'hero.visual.dados': 'dados',
+          'services.eyebrow': 'Nossos serviços',
+          'services.title': 'Da estratégia à operação em produção',
+          'services.desc': 'Cobrimos o ciclo completo: descoberta, arquitetura, implementação, governança e evolução contínua.',
+          'services.01.title': 'Estratégia & Adoção de IA',
+          'services.01.desc': 'Assessment de maturidade, definição de casos de uso prioritários, roadmap de implementação e governança de dados.',
+          'services.01.items.0': 'Discovery & assessment de maturidade',
+          'services.01.items.1': 'Roadmap técnico e financeiro',
+          'services.01.items.2': 'Governança, ética e compliance',
+          'services.02.title': 'Implementação IA Generativa',
+          'services.02.desc': 'Deploy de Copilot, ChatGPT Enterprise, Claude e modelos open-source, com RAG, agents e integração a sistemas legados.',
+          'services.02.items.0': 'Copilot, ChatGPT Enterprise, Claude',
+          'services.02.items.1': 'RAG e bases de conhecimento privadas',
+          'services.02.items.2': 'Fine-tuning e modelos customizados',
+          'services.03.title': 'Infraestrutura & Servidores',
+          'services.03.desc': 'Data centers, clusters GPU/HPC para treinamento, storage NVMe/all-flash, backup e redes de baixa latência.',
+          'services.03.items.0': 'Data centers e clusters HPC/GPU',
+          'services.03.items.1': 'Storage NVMe e backup',
+          'services.03.items.2': 'IaC (Terraform, Ansible) e GitOps',
+          'services.04.title': 'Cloud Híbrida & Kubernetes',
+          'services.04.desc': 'Arquitetura híbrida on-prem + cloud (AWS, Azure, GCP), Kubernetes, migração de workloads, FinOps e disaster recovery.',
+          'services.04.items.0': 'Arquitetura híbrida e edge',
+          'services.04.items.1': 'Kubernetes (EKS, AKS, GKE)',
+          'services.04.items.2': 'FinOps e disaster recovery',
+          'services.05.title': 'Data Engineering & MLOps',
+          'services.05.desc': 'Pipelines de dados em tempo real, data lakes, feature stores, streaming e dashboards executivos.',
+          'services.05.items.0': 'Data lakes e lakehouses',
+          'services.05.items.1': 'Feature stores e MLOps',
+          'services.05.items.2': 'Streaming e BI executivo',
+          'services.06.title': 'Segurança & Compliance IA',
+          'services.06.desc': 'Red teaming para LLMs, guardrails, prevenção de vazamento de dados e conformidade com LGPD, GDPR e AI Act.',
+          'services.06.items.0': 'AI red teaming e guardrails',
+          'services.06.items.1': 'Prevenção de vazamento (DLP)',
+          'services.06.items.2': 'LGPD, GDPR e AI Act',
+          'about.eyebrow': 'Sobre a Founders AI',
+          'about.title': 'Do data center para a IA generativa',
+          'about.desc': 'Infraestrutura crítica de missão é a base. Sobre ela, entregamos adoção de inteligência artificial com governança, segurança e entrega contínua.',
+          'about.base.title': 'Nossa base',
+          'about.base.p1': 'Começamos na gestão de infraestrutura crítica para bancos, seguradoras e grandes varejistas: servidores, redes, storage e alta disponibilidade. Essa experiência é a vantagem que trazemos para a inteligência artificial — sabemos onde ela roda, como ela escala e como proteger os dados dela.',
+          'about.base.p2': 'Não vendemos hype. Entregamos arquitetura, implementação e evolução contínua para empresas que adotam Copilot, ChatGPT Enterprise, Claude e modelos open-source com responsabilidade.',
+          'about.process.title': 'Como trabalhamos',
+          'about.process.01.title': 'Descoberta',
+          'about.process.01.desc': 'Avaliamos maturidade, casos de uso e requisitos de infraestrutura.',
+          'about.process.02.title': 'Arquitetura',
+          'about.process.02.desc': 'Definimos modelo de IA, ambiente de servidores e governança de dados.',
+          'about.process.03.title': 'Implantação',
+          'about.process.03.desc': 'Implementamos, integramos a sistemas legados e treinamos times.',
+          'about.process.04.title': 'Evolução',
+          'about.process.04.desc': 'Acompanhamos uso, ajustamos modelos e mantemos a operação segura.',
+          'tech.eyebrow': '03 / Ecossistema tecnológico',
+          'tech.title': 'A ferramenta certa.<br /><span class="muted">Para o seu cenário.</span>',
+          'tech.desc': 'A escolha começa no problema, não no fornecedor. Avaliamos as tecnologias conforme os requisitos de cada projeto.',
+          'tech.cat.ai.title': 'Inteligência artificial',
+          'tech.cat.ai.items.0': 'Microsoft Copilot',
+          'tech.cat.ai.items.1': 'ChatGPT',
+          'tech.cat.ai.items.2': 'Claude',
+          'tech.cat.ai.items.3': 'Llama',
+          'tech.cat.cloud.title': 'Cloud',
+          'tech.cat.cloud.items.0': 'Microsoft Azure',
+          'tech.cat.cloud.items.1': 'AWS',
+          'tech.cat.cloud.items.2': 'Google Cloud',
+          'tech.cat.infra.title': 'Infraestrutura & automação',
+          'tech.cat.infra.items.0': 'Linux',
+          'tech.cat.infra.items.1': 'VMware',
+          'tech.cat.infra.items.2': 'Kubernetes',
+          'tech.cat.infra.items.3': 'Terraform',
+          'tech.cat.infra.items.4': 'Ansible',
+          'tech.cat.obs.title': 'Observabilidade',
+          'tech.cat.obs.items.0': 'Grafana',
+          'tech.cat.obs.items.1': 'Prometheus',
+          'tech.cat.obs.items.2': 'Datadog',
+          'tech.disclaimer': 'Tecnologias de referência. As marcas citadas pertencem aos seus respectivos titulares e não representam vínculo de parceria ou certificação.',
+          'contact.eyebrow': 'Contato',
+          'contact.title': 'Em configuração',
+          'contact.desc': 'O canal de contato está sendo configurado. Esta página institucional não coleta dados e não possui formulário ativo no momento.',
+          'contact.more.title': 'Quer saber mais?',
+          'contact.more.desc': 'Acompanhe o projeto no GitHub. Quando o canal de contato estiver disponível, esta seção será atualizada com os meios de alcance.',
+          'contact.more.link': 'repositório no GitHub →',
+          'contact.status.title': 'Status do contato',
+          'contact.status.no-data': 'Sem coleta de dados.',
+          'contact.status.no-form': 'Não há formulário, telefone ou endereço publicados nesta versão.',
+          'contact.status.update': 'Atualização prevista em breve.',
+          'selector.button.pt': 'Português (Brasil)',
+          'selector.button.en': 'Inglês (Estados Unidos)',
+          'selector.button.de': 'Alemão (Alemanha)',
+          'selector.button.es': 'Espanhol (Espanha)',
+        },
+        en: {
+          'skip.link': 'Skip to main content',
+          'og.locale': 'en_US',
+          'nav.servicos': 'Services',
+          'nav.sobre': 'About',
+          'nav.tecnologias': 'Technologies',
+          'nav.contato': 'Contact',
+          'footer.copy': 'Applied intelligence. Well-built infrastructure.',
+          'footer.consulting': 'AI and infrastructure consulting.',
+          'footer.brand': 'Founders AI.',
+          'footer.voltar': 'Back to top ↑',
+          'hero.eyebrow': 'Artificial intelligence and infrastructure consulting',
+          'hero.title': 'Applied AI <em class="accent">with trusted infrastructure</em>',
+          'hero.desc': 'We help companies adopt Copilot, ChatGPT Enterprise, Claude and open-source models with governance, suitable servers and large-scale deployment — from strategy to production environment.',
+          'hero.btn-iniciar': 'Start project',
+          'hero.btn-servicos': 'View services',
+          'hero.visual.ia01': 'ia-01',
+          'hero.visual.ativo': 'active',
+          'hero.visual.producao': 'production',
+          'hero.visual.infra': 'infra',
+          'hero.visual.cloud': 'cloud',
+          'hero.visual.dados': 'data',
+          'services.eyebrow': 'Our services',
+          'services.title': 'From strategy to production operation',
+          'services.desc': 'We cover the full cycle: discovery, architecture, implementation, governance and continuous evolution.',
+          'services.01.title': 'AI Strategy & Adoption',
+          'services.01.desc': 'Maturity assessment, definition of priority use cases, implementation roadmap and data governance.',
+          'services.01.items.0': 'Discovery & maturity assessment',
+          'services.01.items.1': 'Technical and financial roadmap',
+          'services.01.items.2': 'Governance, ethics and compliance',
+          'services.02.title': 'Generative AI Implementation',
+          'services.02.desc': 'Deployment of Copilot, ChatGPT Enterprise, Claude and open-source models, with RAG, agents and integration with legacy systems.',
+          'services.02.items.0': 'Copilot, ChatGPT Enterprise, Claude',
+          'services.02.items.1': 'RAG and private knowledge bases',
+          'services.02.items.2': 'Fine-tuning and custom models',
+          'services.03.title': 'Infrastructure & Servers',
+          'services.03.desc': 'Data centers, GPU/HPC clusters for training, NVMe/all-flash storage, backup and low-latency networks.',
+          'services.03.items.0': 'Data centers and HPC/GPU clusters',
+          'services.03.items.1': 'NVMe storage and backup',
+          'services.03.items.2': 'IaC (Terraform, Ansible) and GitOps',
+          'services.04.title': 'Hybrid Cloud & Kubernetes',
+          'services.04.desc': 'Hybrid architecture on-prem + cloud (AWS, Azure, GCP), Kubernetes, workload migration, FinOps and disaster recovery.',
+          'services.04.items.0': 'Hybrid and edge architecture',
+          'services.04.items.1': 'Kubernetes (EKS, AKS, GKE)',
+          'services.04.items.2': 'FinOps and disaster recovery',
+          'services.05.title': 'Data Engineering & MLOps',
+          'services.05.desc': 'Real-time data pipelines, data lakes, feature stores, streaming and executive dashboards.',
+          'services.05.items.0': 'Data lakes and lakehouses',
+          'services.05.items.1': 'Feature stores and MLOps',
+          'services.05.items.2': 'Streaming and executive BI',
+          'services.06.title': 'AI Security & Compliance',
+          'services.06.desc': 'Red teaming for LLMs, guardrails, data leak prevention and compliance with LGPD, GDPR and AI Act.',
+          'services.06.items.0': 'AI red teaming and guardrails',
+          'services.06.items.1': 'Data leak prevention (DLP)',
+          'services.06.items.2': 'LGPD, GDPR and AI Act',
+          'about.eyebrow': 'About Founders AI',
+          'about.title': 'From data center to generative AI',
+          'about.desc': 'Mission-critical infrastructure is the foundation. On it, we deliver AI adoption with governance, security and continuous delivery.',
+          'about.base.title': 'Our foundation',
+          'about.base.p1': 'We started managing critical infrastructure for banks, insurers and large retailers: servers, networks, storage and high availability. This experience is the advantage we bring to artificial intelligence — we know where it runs, how it scales and how to protect its data.',
+          'about.base.p2': "We don't sell hype. We deliver architecture, implementation and continuous evolution for companies adopting Copilot, ChatGPT Enterprise, Claude and open-source models responsibly.",
+          'about.process.title': 'How we work',
+          'about.process.01.title': 'Discovery',
+          'about.process.01.desc': 'We assess maturity, use cases and infrastructure requirements.',
+          'about.process.02.title': 'Architecture',
+          'about.process.02.desc': 'We define AI model, server environment and data governance.',
+          'about.process.03.title': 'Implementation',
+          'about.process.03.desc': 'We implement, integrate with legacy systems and train teams.',
+          'about.process.04.title': 'Evolution',
+          'about.process.04.desc': 'We monitor usage, adjust models and keep operations secure.',
+          'tech.eyebrow': '03 / Technology ecosystem',
+          'tech.title': 'The right tool.<br /><span class="muted">For your scenario.</span>',
+          'tech.desc': "Choice starts with the problem, not the vendor. We evaluate technologies according to each project's requirements.",
+          'tech.cat.ai.title': 'Artificial intelligence',
+          'tech.cat.ai.items.0': 'Microsoft Copilot',
+          'tech.cat.ai.items.1': 'ChatGPT',
+          'tech.cat.ai.items.2': 'Claude',
+          'tech.cat.ai.items.3': 'Llama',
+          'tech.cat.cloud.title': 'Cloud',
+          'tech.cat.cloud.items.0': 'Microsoft Azure',
+          'tech.cat.cloud.items.1': 'AWS',
+          'tech.cat.cloud.items.2': 'Google Cloud',
+          'tech.cat.infra.title': 'Infrastructure & automation',
+          'tech.cat.infra.items.0': 'Linux',
+          'tech.cat.infra.items.1': 'VMware',
+          'tech.cat.infra.items.2': 'Kubernetes',
+          'tech.cat.infra.items.3': 'Terraform',
+          'tech.cat.infra.items.4': 'Ansible',
+          'tech.cat.obs.title': 'Observability',
+          'tech.cat.obs.items.0': 'Grafana',
+          'tech.cat.obs.items.1': 'Prometheus',
+          'tech.cat.obs.items.2': 'Datadog',
+          'tech.disclaimer': 'Reference technologies. Mentioned brands belong to their respective owners and do not represent partnership or certification ties.',
+          'contact.eyebrow': 'Contact',
+          'contact.title': 'Under setup',
+          'contact.desc': 'The contact channel is being set up. This institutional page does not collect data and has no active form at the moment.',
+          'contact.more.title': 'Want to know more?',
+          'contact.more.desc': 'Follow the project on GitHub. When the contact channel is available, this section will be updated with contact means.',
+          'contact.more.link': 'GitHub repository →',
+          'contact.status.title': 'Contact status',
+          'contact.status.no-data': 'No data collection.',
+          'contact.status.no-form': 'No form, phone or address published in this version.',
+          'contact.status.update': 'Update coming soon.',
+          'selector.button.pt': 'Portuguese (Brazil)',
+          'selector.button.en': 'English (United States)',
+          'selector.button.de': 'German (Germany)',
+          'selector.button.es': 'Spanish (Spain)',
+        },
+        de: {
+          'skip.link': 'Zum Hauptinhalt springen',
+          'og.locale': 'de_DE',
+          'nav.servicos': 'Dienstleistungen',
+          'nav.sobre': 'Über uns',
+          'nav.tecnologias': 'Technologien',
+          'nav.contato': 'Kontakt',
+          'footer.copy': 'Angewandte Intelligenz. Gebaute Infrastruktur.',
+          'footer.consulting': 'KI- und Infrastrukturberatung.',
+          'footer.brand': 'Founders AI.',
+          'footer.voltar': 'Nach oben ↑',
+          'hero.eyebrow': 'Beratung für künstliche Intelligenz und Infrastruktur',
+          'hero.title': 'Angewandte KI <em class="accent">mit vertrauenswürdiger Infrastruktur</em>',
+          'hero.desc': 'Wir helfen Unternehmen, Copilot, ChatGPT Enterprise, Claude und Open-Source-Modelle mit Governance, geeigneten Servern und Implementierung im großen Maßstab einzuführen — von der Strategie bis zur Produktionsumgebung.',
+          'hero.btn-iniciar': 'Projekt starten',
+          'hero.btn-servicos': 'Leistungen anzeigen',
+          'hero.visual.ia01': 'ia-01',
+          'hero.visual.ativo': 'aktiv',
+          'hero.visual.producao': 'Produktion',
+          'hero.visual.infra': 'Infra',
+          'hero.visual.cloud': 'Cloud',
+          'hero.visual.dados': 'Daten',
+          'services.eyebrow': 'Unsere Leistungen',
+          'services.title': 'Von Strategie bis zum Produktiveinsatz',
+          'services.desc': 'Wir decken den gesamten Zyklus ab: Entdeckung, Architektur, Implementierung, Governance und kontinuierliche Weiterentwicklung.',
+          'services.01.title': 'KI-Strategie & Adoption',
+          'services.01.desc': 'Reifegradbewertung, Definition prioriter Anwendungsfälle, Implementierungsfahrplan und Daten-Governance.',
+          'services.01.items.0': 'Discovery & Reifegradbewertung',
+          'services.01.items.1': 'Technischer und finanzieller Fahrplan',
+          'services.01.items.2': 'Governance, Ethik und Compliance',
+          'services.02.title': 'Implementierung Generative KI',
+          'services.02.desc': 'Bereitstellung von Copilot, ChatGPT Enterprise, Claude und Open-Source-Modellen, mit RAG, Agenten und Integration in Legacy-Systeme.',
+          'services.02.items.0': 'Copilot, ChatGPT Enterprise, Claude',
+          'services.02.items.1': 'RAG und private Wissensdatenbanken',
+          'services.02.items.2': 'Feinabstimmung und benutzerdefinierte Modelle',
+          'services.03.title': 'Infrastruktur & Server',
+          'services.03.desc': 'Rechenzentren, GPU/HPC-Cluster für Training, NVMe/all-flash-Speicher, Backup und Netzwerke mit geringer Latenz.',
+          'services.03.items.0': 'Rechenzentren und HPC/GPU-Cluster',
+          'services.03.items.1': 'NVMe-Speicher und Backup',
+          'services.03.items.2': 'IaC (Terraform, Ansible) und GitOps',
+          'services.04.title': 'Hybrid Cloud & Kubernetes',
+          'services.04.desc': 'Hybridarchitektur on-prem + Cloud (AWS, Azure, GCP), Kubernetes, Workload-Migration, FinOps und Disaster Recovery.',
+          'services.04.items.0': 'Hybrid- und Edge-Architektur',
+          'services.04.items.1': 'Kubernetes (EKS, AKS, GKE)',
+          'services.04.items.2': 'FinOps und Disaster Recovery',
+          'services.05.title': 'Data Engineering & MLOps',
+          'services.05.desc': 'Echtzeit-Datenpipelines, Data Lakes, Feature Stores, Streaming und Executive Dashboards.',
+          'services.05.items.0': 'Data Lakes und Lakehouses',
+          'services.05.items.1': 'Feature Stores und MLOps',
+          'services.05.items.2': 'Streaming und Executive BI',
+          'services.06.title': 'KI-Sicherheit & Compliance',
+          'services.06.desc': 'Red Teaming für LLMs, Guardrails, Datenleckvermeidung und Compliance mit LGPD, GDPR und KI-Verordnung.',
+          'services.06.items.0': 'KI Red Teaming und Guardrails',
+          'services.06.items.1': 'Vermeidung von Datenlecks (DLP)',
+          'services.06.items.2': 'LGPD, GDPR und KI-Verordnung',
+          'about.eyebrow': 'Über Founders AI',
+          'about.title': 'Vom Rechenzentrum zur generativen KI',
+          'about.desc': 'Missionkritische Infrastruktur ist die Grundlage. Darauf liefern wir KI-Adoption mit Governance, Sicherheit und kontinuierlicher Bereitstellung.',
+          'about.base.title': 'Unsere Basis',
+          'about.base.p1': 'Wir begannen mit der Verwaltung kritischer Infrastruktur für Banken, Versicherungen und große Einzelhändler: Server, Netzwerke, Storage und Hochverfügbarkeit. Diese Erfahrung ist der Vorteil, den wir in die künstliche Intelligenz einbringen — wir wissen, wo sie läuft, wie sie skaliert und wie wir ihre Daten schützen.',
+          'about.base.p2': 'Wir verkaufen keinen Hype. Wir liefern Architektur, Implementierung und kontinuierliche Weiterentwicklung für Unternehmen, die Copilot, ChatGPT Enterprise, Claude und Open-Source-Modelle verantwortungsvoll einsetzen.',
+          'about.process.title': 'So arbeiten wir',
+          'about.process.01.title': 'Entdeckung',
+          'about.process.01.desc': 'Wir bewerten Reifegrad, Anwendungsfälle und Infrastruktur-Anforderungen.',
+          'about.process.02.title': 'Architektur',
+          'about.process.02.desc': 'Wir definieren KI-Modell, Server-Umgebung und Daten-Governance.',
+          'about.process.03.title': 'Implementierung',
+          'about.process.03.desc': 'Wir implementieren, integrieren Legacy-Systeme und schulen Teams.',
+          'about.process.04.title': 'Weiterentwicklung',
+          'about.process.04.desc': 'Wir überwachen Nutzung, passen Modelle an und halten den Betrieb sicher.',
+          'tech.eyebrow': '03 / Technologie-Ökosystem',
+          'tech.title': 'Das richtige Tool.<br /><span class="muted">Für Ihr Szenario.</span>',
+          'tech.desc': 'Die Wahl beginnt beim Problem, nicht beim Anbieter. Wir bewerten Technologien gemäß den Anforderungen jedes Projekts.',
+          'tech.cat.ai.title': 'Künstliche Intelligenz',
+          'tech.cat.ai.items.0': 'Microsoft Copilot',
+          'tech.cat.ai.items.1': 'ChatGPT',
+          'tech.cat.ai.items.2': 'Claude',
+          'tech.cat.ai.items.3': 'Llama',
+          'tech.cat.cloud.title': 'Cloud',
+          'tech.cat.cloud.items.0': 'Microsoft Azure',
+          'tech.cat.cloud.items.1': 'AWS',
+          'tech.cat.cloud.items.2': 'Google Cloud',
+          'tech.cat.infra.title': 'Infrastruktur & Automatisierung',
+          'tech.cat.infra.items.0': 'Linux',
+          'tech.cat.infra.items.1': 'VMware',
+          'tech.cat.infra.items.2': 'Kubernetes',
+          'tech.cat.infra.items.3': 'Terraform',
+          'tech.cat.infra.items.4': 'Ansible',
+          'tech.cat.obs.title': 'Observability',
+          'tech.cat.obs.items.0': 'Grafana',
+          'tech.cat.obs.items.1': 'Prometheus',
+          'tech.cat.obs.items.2': 'Datadog',
+          'tech.disclaimer': 'Referenztechnologien. Genannte Marken gehören ihren jeweiligen Eigentümern und stellen keine Partnerschafts- oder Zertifizierungsbeziehungen dar.',
+          'contact.eyebrow': 'Kontakt',
+          'contact.title': 'In Einrichtung',
+          'contact.desc': 'Der Kontaktkanal wird eingerichtet. Diese Institutionsseite sammelt keine Daten und hat aktuell kein aktives Formular.',
+          'contact.more.title': 'Mehr erfahren?',
+          'contact.more.desc': 'Folgen Sie dem Projekt auf GitHub. Wenn der Kontaktkanal verfügbar ist, wird dieser Bereich mit Kontaktmöglichkeiten aktualisiert.',
+          'contact.more.link': 'GitHub-Repository →',
+          'contact.status.title': 'Kontaktstatus',
+          'contact.status.no-data': 'Keine Datenerhebung.',
+          'contact.status.no-form': 'Kein Formular, keine Telefonnummer oder Adresse in dieser Version veröffentlicht.',
+          'contact.status.update': 'Aktualisierung in Kürze.',
+          'selector.button.pt': 'Portugiesisch (Brasilien)',
+          'selector.button.en': 'Englisch (Vereinigte Staaten)',
+          'selector.button.de': 'Deutsch (Deutschland)',
+          'selector.button.es': 'Spanisch (Spanien)',
+        },
+        es: {
+          'skip.link': 'Saltar al contenido principal',
+          'og.locale': 'es_ES',
+          'nav.servicos': 'Servicios',
+          'nav.sobre': 'Sobre nosotros',
+          'nav.tecnologias': 'Tecnologías',
+          'nav.contato': 'Contacto',
+          'footer.copy': 'Inteligencia aplicada. Infraestructura bien construida.',
+          'footer.consulting': 'Consultoría en IA e infraestructura.',
+          'footer.brand': 'Founders AI.',
+          'footer.voltar': 'Volver arriba ↑',
+          'hero.eyebrow': 'Consultoría de inteligencia artificial e infraestructura',
+          'hero.title': 'IA aplicada <em class="accent">con infraestructura de confianza</em>',
+          'hero.desc': 'Ayudamos a empresas a adoptar Copilot, ChatGPT Enterprise, Claude y modelos de código abierto con gobernanza, servidores adecuados e implementación a gran escala — desde la estrategia hasta el entorno de producción.',
+          'hero.btn-iniciar': 'Iniciar projeto',
+          'hero.btn-servicos': 'Ver serviços',
+          'hero.visual.ia01': 'ia-01',
+          'hero.visual.ativo': 'activo',
+          'hero.visual.producao': 'producción',
+          'hero.visual.infra': 'infra',
+          'hero.visual.cloud': 'nube',
+          'hero.visual.dados': 'datos',
+          'services.eyebrow': 'Nuestros servicios',
+          'services.title': 'De la estrategia a la operación en producción',
+          'services.desc': 'Cubrimos el ciclo completo: descubrimiento, arquitectura, implementación, governanza y evolución continua.',
+          'services.01.title': 'Estrategia y adopción de IA',
+          'services.01.desc': 'Evaluación de madurez, definición de casos de uso prioritarios, hoja de ruta de implementación y gobernanza de datos.',
+          'services.01.items.0': 'Descubrimiento y evaluación de madurez',
+          'services.01.items.1': 'Hoja de ruta técnica y financiera',
+          'services.01.items.2': 'Gobernanza, ética y cumplimiento',
+          'services.02.title': 'Implementación de IA generativa',
+          'services.02.desc': 'Despliegue de Copilot, ChatGPT Enterprise, Claude y modelos de código abierto, con RAG, agentes e integración con sistemas legados.',
+          'services.02.items.0': 'Copilot, ChatGPT Enterprise, Claude',
+          'services.02.items.1': 'RAG y bases de conocimiento privadas',
+          'services.02.items.2': 'Fine-tuning y modelos personalizados',
+          'services.03.title': 'Infraestructura y servidores',
+          'services.03.desc': 'Centros de datos, clústeres GPU/HPC para entrenamiento, almacenamiento NVMe/all-flash, backup y redes de baja latencia.',
+          'services.03.items.0': 'Centros de datos y clústeres HPC/GPU',
+          'services.03.items.1': 'Almacenamiento NVMe y backup',
+          'services.03.items.2': 'IaC (Terraform, Ansible) y GitOps',
+          'services.04.title': 'Nube híbrida y Kubernetes',
+          'services.04.desc': 'Arquitectura híbrida on-prem + nube (AWS, Azure, GCP), Kubernetes, migración de cargas de trabajo, FinOps y recuperación ante desastres.',
+          'services.04.items.0': 'Arquitectura híbrida y edge',
+          'services.04.items.1': 'Kubernetes (EKS, AKS, GKE)',
+          'services.04.items.2': 'FinOps y recuperación ante desastres',
+          'services.05.title': 'Ingeniería de datos y MLOps',
+          'services.05.desc': 'Canalizaciones de datos en tiempo real, data lakes, almacenes de características, streaming y paneles ejecutivos.',
+          'services.05.items.0': 'Data lakes y lakehouses',
+          'services.05.items.1': 'Almacenes de características y MLOps',
+          'services.05.items.2': 'Streaming y BI ejecutivo',
+          'services.06.title': 'Seguridad y cumplimiento de IA',
+          'services.06.desc': 'Red teaming para LLMs, guardrails, prevención de filtración de datos y cumplimiento con LGPD, GDPR y la Ley de IA.',
+          'services.06.items.0': 'Red teaming de IA y guardrails',
+          'services.06.items.1': 'Prevención de filtración de datos (DLP)',
+          'services.06.items.2': 'LGPD, GDPR y Ley de IA',
+          'about.eyebrow': 'Sobre Founders AI',
+          'about.title': 'Del centro de datos a la IA generativa',
+          'about.desc': 'La infraestructura crítica de misión es la base. Sobre ella, entregamos adopción de IA con gobernanza, seguridad y entrega continua.',
+          'about.base.title': 'Nuestra base',
+          'about.base.p1': 'Empezamos gestionando infraestructura crítica para bancos, aseguradoras y grandes minoristas: servidores, redes, almacenamiento y alta disponibilidad. Esta experiencia es la ventaja que aportamos a la inteligencia artificial — sabemos dónde corre, cómo escala y cómo proteger sus datos.',
+          'about.base.p2': 'No vendemos exageración. Entregamos arquitectura, implementación y evolución continua para empresas que adoptan Copilot, ChatGPT Enterprise, Claude y modelos de código abierto con responsabilidad.',
+          'about.process.title': 'Cómo trabajamos',
+          'about.process.01.title': 'Descubrimiento',
+          'about.process.01.desc': 'Evaluamos madurez, casos de uso y requisitos de infraestructura.',
+          'about.process.02.title': 'Arquitectura',
+          'about.process.02.desc': 'Definimos modelo de IA, entorno de servidores y gobernanza de dados.',
+          'about.process.03.title': 'Implementación',
+          'about.process.03.desc': 'Implementamos, integramos sistemas legados y capacitamos equipos.',
+          'about.process.04.title': 'Evolución',
+          'about.process.04.desc': 'Monitoreamos el uso, ajustamos modelos y mantenemos la operación segura.',
+          'tech.eyebrow': '03 / Ecosistema tecnológico',
+          'tech.title': 'La herramienta adecuada.<br /><span class="muted">Para tu escenario.</span>',
+          'tech.desc': 'La elección empieza por el problema, no por el proveedor. Evaluamos las tecnologías según los requisitos de cada proyecto.',
+          'tech.cat.ai.title': 'Inteligencia artificial',
+          'tech.cat.ai.items.0': 'Microsoft Copilot',
+          'tech.cat.ai.items.1': 'ChatGPT',
+          'tech.cat.ai.items.2': 'Claude',
+          'tech.cat.ai.items.3': 'Llama',
+          'tech.cat.cloud.title': 'Nube',
+          'tech.cat.cloud.items.0': 'Microsoft Azure',
+          'tech.cat.cloud.items.1': 'AWS',
+          'tech.cat.cloud.items.2': 'Google Cloud',
+          'tech.cat.infra.title': 'Infraestructura y automatización',
+          'tech.cat.infra.items.0': 'Linux',
+          'tech.cat.infra.items.1': 'VMware',
+          'tech.cat.infra.items.2': 'Kubernetes',
+          'tech.cat.infra.items.3': 'Terraform',
+          'tech.cat.infra.items.4': 'Ansible',
+          'tech.cat.obs.title': 'Observabilidad',
+          'tech.cat.obs.items.0': 'Grafana',
+          'tech.cat.obs.items.1': 'Prometheus',
+          'tech.cat.obs.items.2': 'Datadog',
+          'tech.disclaimer': 'Tecnologías de referencia. Las marcas mencionadas pertenecen a sus respectivos titulares y no representan vínculo de asociación o certificación.',
+          'contact.eyebrow': 'Contacto',
+          'contact.title': 'En configuración',
+          'contact.desc': 'El canal de contacto se está configurando. Esta página institucional no recopila datos y no tiene formulario activo en este momento.',
+          'contact.more.title': '¿Quieres saber más?',
+          'contact.more.desc': 'Sigue el proyecto en GitHub. Cuando el canal de contacto esté disponible, esta sección se actualizará con los medios de contacto.',
+          'contact.more.link': 'repositorio en GitHub →',
+          'contact.status.title': 'Estado del contacto',
+          'contact.status.no-data': 'Sin recopilación de datos.',
+          'contact.status.no-form': 'No hay formulario, teléfono ni dirección publicados en esta versión.',
+          'contact.status.update': 'Actualización prevista próximamente.',
+          'selector.button.pt': 'Portugués (Brasil)',
+          'selector.button.en': 'Inglés (Estados Unidos)',
+          'selector.button.de': 'Alemán (Alemania)',
+          'selector.button.es': 'Español (España)',
+        },
+      };
+
+      function getStoredLang() {
+        if (typeof window === 'undefined') return DEFAULT_LANG;
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (VALID_LANGS.includes(stored)) return stored;
+        } catch { /* ignore — private browsing may block localStorage */ }
+        return DEFAULT_LANG;
+      }
+
+      function setHtmlLang(lang) {
+        document.documentElement.lang = LANG_HTML[lang];
+      }
+
+      const HTML_KEYS = new Set(['hero.title', 'tech.title']);
+
+      function applyTranslations(lang) {
+        const dict = translations[lang];
+        const elements = document.querySelectorAll('[data-i18n]');
+        for (const el of elements) {
+          const key = el.getAttribute('data-i18n');
+          if (!key) continue;
+          const value = dict[key];
+          if (value === undefined) continue;
+          const attr = el.getAttribute('data-i18n-attr');
+          if (attr) {
+            el.setAttribute(attr, value);
+          } else if (HTML_KEYS.has(key)) {
+            el.innerHTML = value;
+          } else {
+            el.textContent = value;
+          }
+        }
+      }
+
+      function updateActiveButton(activeLang) {
+        const buttons = document.querySelectorAll('[data-lang]');
+        for (const btn of buttons) {
+          const isActive = btn.getAttribute('data-lang') === activeLang;
+          btn.setAttribute('aria-pressed', String(isActive));
+        }
+      }
+
+      function initI18n() {
+        const lang = getStoredLang();
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch { /* ignore */ }
+        setHtmlLang(lang);
+        applyTranslations(lang);
+        updateActiveButton(lang);
+
+        const buttons = document.querySelectorAll('[data-lang]');
+        for (const btn of buttons) {
+          btn.addEventListener('click', () => {
+            const clicked = btn.getAttribute('data-lang');
+            if (!clicked || !VALID_LANGS.includes(clicked)) return;
+            try { localStorage.setItem(STORAGE_KEY, clicked); } catch { /* ignore */ }
+            setHtmlLang(clicked);
+            applyTranslations(clicked);
+            updateActiveButton(clicked);
+          });
+        }
+      }
+
+      initI18n();
+    </script>
   </body>
 </html>
-
-<style is:global>
-  /* Font families */
-  .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
-  .font-inter { font-family: 'Inter', sans-serif; }
-
-  /* Screen reader only */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* Focus visible for accessibility */
-  :focus-visible {
-    outline: 2px solid #d0ac3c;
-    outline-offset: 2px;
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* Print styles */
-  @media print {
-    .no-print { display: none !important; }
-    body { background: white !important; color: black !important; }
-  }
-</style>

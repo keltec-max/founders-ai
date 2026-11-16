@@ -1,36 +1,19 @@
 {
   "name": "Founders AI",
   "short_name": "Founders AI",
-  "description": "Consultoria em IA Generativa, Infraestrutura e Servidores. 15+ anos de experiência corporativa.",
-  "start_url": "/",
+  "description": "Consultoria em inteligência artificial e infraestrutura corporativa.",
+  "start_url": "/founders-ai/",
   "display": "standalone",
-  "background_color": "#020617",
-  "theme_color": "#F59E0B",
+  "background_color": "#0d0f11",
+  "theme_color": "#0d0f11",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/founders-ai/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "technology", "productivity"],
-  "screenshots": [],
-  "shortcuts": [
-    {
-      "name": "Contato",
-      "short_name": "Contato",
-      "description": "Fale com um especialista",
-      "url": "/#contato",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
-    },
-    {
-      "name": "Serviços",
-      "short_name": "Serviços",
-      "description": "Nossos serviços de IA e Infraestrutura",
-      "url": "/#servicos",
-      "icons": [{ "src": "/favicon.svg", "sizes": "192x192" }]
-    }
-  ]
+  "categories": ["business", "technology", "productivity"]
 }

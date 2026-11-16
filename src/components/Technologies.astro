@@ -1,227 +1,32 @@
 ---
-interface Props {
-  className?: string
-}
-const { className = '' } = Astro.props
-
-// Tech card data
-const aiPlatforms = [
-  { name: 'GitHub Copilot', category: 'Code Gen', logo: 'copilot' },
-  { name: 'ChatGPT Enterprise', category: 'LLM', logo: 'openai' },
-  { name: 'Claude', category: 'LLM', logo: 'anthropic' },
-  { name: 'Azure OpenAI', category: 'Enterprise', logo: 'azure' },
-  { name: 'AWS Bedrock', category: 'Managed', logo: 'aws' },
-  { name: 'Vertex AI', category: 'Managed', logo: 'gcp' },
-  { name: 'Llama / Mistral', category: 'Open Source', logo: 'opensource' },
-]
-
-const infrastructure = [
-  { name: 'Dell EMC / HPE', category: 'Hardware', logo: 'dell' },
-  { name: 'NVIDIA DGX / HGX', category: 'GPU Compute', logo: 'nvidia' },
-  { name: 'VMware / vSphere', category: 'Virtualização', logo: 'vmware' },
-  { name: 'Red Hat OpenShift', category: 'Kubernetes', logo: 'redhat' },
-  { name: 'Pure Storage', category: 'All-Flash', logo: 'purestorage' },
-  { name: 'Cisco / Arista', category: 'Networking', logo: 'cisco' },
-]
-
-const cloudDevOps = [
-  { name: 'AWS', category: 'Cloud', logo: 'aws' },
-  { name: 'Microsoft Azure', category: 'Cloud', logo: 'azure' },
-  { name: 'Google Cloud', category: 'Cloud', logo: 'gcp' },
-  { name: 'Terraform', category: 'IaC', logo: 'terraform' },
-  { name: 'Ansible', category: 'Automation', logo: 'ansible' },
-  { name: 'Kubernetes', category: 'Orchestration', logo: 'k8s' },
-  { name: 'Kafka / Flink', category: 'Streaming', logo: 'kafka' },
-  { name: 'Databricks', category: 'Data & AI', logo: 'databricks' },
-]
-
-const security = [
-  { name: 'HashiCorp Vault', category: 'Secrets', logo: 'vault' },
-  { name: 'Splunk / Datadog', category: 'Observability', logo: 'datadog' },
-  { name: 'Grafana / Prometheus', category: 'Monitoring', logo: 'grafana' },
-  { name: 'Checkov / OPA', category: 'Policy as Code', logo: 'opa' },
-  { name: 'Snyk / Aqua', category: 'AppSec', logo: 'snyk' },
-  { name: 'Vanta / Drata', category: 'Compliance', logo: 'vanta' },
-]
-
-const certifications = [
-  { name: 'Microsoft Solutions Partner', sub: 'Data & AI • Infrastructure' },
-  { name: 'AWS Advanced Consulting Partner', sub: 'Machine Learning Competency' },
-  { name: 'Google Cloud Partner', sub: 'Data Analytics Specialization' },
-  { name: 'NVIDIA Partner Network', sub: 'DGX-Ready & Compute' },
-  { name: 'ISO 27001 Certified', sub: 'Gestão de Segurança da Informação' },
-  { name: 'SOC 2 Type II', sub: 'Controles de Segurança e Disponibilidade' },
-]
-
-// Logo SVG map
-function getLogoSVG(logo: string): string {
-  const logos: Record<string, string> = {
-    copilot: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>`,
-    openai: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>`,
-    anthropic: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12.01 1.02c-1.71-.85-3.63-.85-5.33 0-2.01 1-3.07 3.29-2.54 5.34.5 1.95 2.12 3.55 4.13 3.99.53.12 1.05.18 1.58.18.54 0 1.05-.06 1.58-.18 2.01-.44 3.63-2.04 4.13-3.99.54-2.06-.51-4.34-2.53-5.34zm-.01 2.56c1.37.69 2.34 1.98 2.62 3.46-.18-.59-.53-1.13-.99-1.63-.46-.48-1.01-.86-1.63-.99-1.49-.28-2.77-1.58-3.46-2.62.18.59.53 1.13.99 1.63.46.48 1.01.86 1.63.99 1.48.28 2.77 1.57 3.46 2.62zm-.01 13.89c-1.37-.69-2.34-1.98-2.62-3.46.18.59.53 1.13.99 1.63.46.48 1.01.86 1.63.99 1.49.28 2.77 1.58 3.46 2.62-.18-.59-.53-1.13-.99-1.63-.46-.48-1.01-.86-1.63-.99-1.48-.28-2.77-1.57-3.46-2.62z"/></svg>`,
-    azure: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M21.9 1.1c-.9.4-1.9.4-2.8 0l-5.4-2.5c-.9-.4-1.9.1-2.3.9l-3.9 7.9c-.5.9.4 1.9 1.3 2.3l9 4.3c.4.2.9.2 1.3 0l9.7-4.5c.9-.4 1.8-1.4 1.4-2.3l-3.9-7.9c-.4-.9-1.4-1.4-2.3-.9zM12 17.7l-6.1-2.8v-5.8l6.1-2.8 6.1 2.8v5.8l-6.1 2.8zm0-11.5l5.4 2.5v5.8l-5.4 2.5-5.4-2.5v-5.8l5.4-2.5z"/></svg>`,
-    aws: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20.8 8.8l-6.1-4c-.3-.2-.7-.2-1 0l-7 4.5c-.5.3-.7.9-.4 1.4l2.9 6.4c.2.4.7.5 1.1.3l7-4.5c.6-.4.8-1.1.4-1.5L13 4.3c-.2-.3-.6-.3-.9 0l-8.8 5.6c-.4.3-.4.9.1 1.2l5.2 5.1c.3.3.8.3 1.1 0l8.4-5.5c.5-.3.7-.9.3-1.3zm-6.1 5.6l-3.6 2.3v-4.6l3.6-2.3v4.6zm5.8-4.1l3 2v4.4l-3 2.2v-4.4l-3-2.1v-4.2l3-2.2v4.2z"/></svg>`,
-    gcp: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,4.076-5.445,4.076c-3.414,0-6.306-2.322-7.181-5.425h-2.959C3.452,15.959,7.283,19,12.545,19c6.848,0,11.202-5.069,11.202-11.314S19.393,3.4,12.545,3.4C8.692,3.4,5.363,5.358,3.655,8.358h2.842C7.614,6.344,9.742,5,12.545,5c2.61,0,4.522,1.624,5.171,3.856H12.545z"/></svg>`,
-    opensource: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.864-.013-1.698-2.782.605-3.369-1.343-3.369-1.343-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.087.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.269 2.75 1.026A9.564 9.564 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.295 2.747-1.026 2.747-1.026.546 1.379.203 2.398.1 2.651.64.699 1.028 1.593 1.028 2.686 0 3.848-2.339 4.695-4.566 4.942.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.48A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>`,
-    dell: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    nvidia: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M22.3 11.5l-3.2-5.6c-.3-.6-1-.9-1.6-.9h-13.8c-.6 0-1.3.3-1.6.9L1.7 11.5c-.5.8 0 1.8.9 2.1l8.2 4.9c.2.1.3.3.5.4V23h1.8v-4.6c.2 0 .3-.1.5-.4l8.2-4.9c.9-.3 1.4-1.3.9-2.1zM11.5 18.8c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm0-4.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm0-4.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/></svg>`,
-    vmware: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M2.3 14.2c-.1.3-.3.6-.4.9 0 0 0 .1 0 .1-.2.6-.2 1.2-.2 1.9 0 .9.3 1.7.7 2.5l6.8-3.9 6.8 3.9c.8-.8 1.6-1.6 2.5-2.5l-6.8-3.9-6.8 3.9zm13.5-6.6c-.2 1.4-.8 2.6-1.6 3.6l4.6 2.6c.8-.9 1.4-2.1 1.6-3.4-.2-1.3-.8-2.5-1.6-3.5l-4.6 2.5zM12 6.5c-2.6 0-4.7 2.1-4.7 4.7s2.1 4.7 4.7 4.7 4.7-2.1 4.7-4.7-2.1-4.7-4.7-4.7zm0 8.2c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></svg>`,
-    redhat: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 2.18l8.58 4.29-8.58 4.29v-8.58zM2 17l10 5 10-5-10-5zm0-9.82l8.58 4.29-8.58 4.29v-8.58z"/></svg>`,
-    purestorage: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.36z"/></svg>`,
-    cisco: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    terraform: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 2.18l8.58 4.29-8.58 4.29v-8.58zM2 17l10 5 10-5-10-5zm0-9.82l8.58 4.29-8.58 4.29v-8.58z"/></svg>`,
-    ansible: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    k8s: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.75c0 2.12-.6 4.1-1.6 5.7 0 0-2.1-.2-5-.2-3.2 0-4.8 0-5 .2-1-1.6-1.6-3.6-1.6-5.7 0-.7.2-1.4.6-2 .5-.7.8-1.5.8-2.3s-.1-1.6-.6-2.3c-.4-.6-1-1.3-1.6-2.1l-.1-.1C7.6 1.7 8.2 1.4 8.9 1.2c.2 0 .4 0 .6 0 5.2 0 9.7 1.2 9.7 6.55zM9.7 16.3c-1.7 0-3.2-.5-4.3-1.5.1-.3.3-.5.5-.8.1-.2.3-.4.5-.5 0 0 1.1-.5 2.8-.5s2.8.5 2.8.5c.2.1.4.3.5.5.2.3.4.5.5.8-1.1 1-2.6 1.5-4.3 1.5z"/></svg>`,
-    kafka: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    databricks: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    vault: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V7c0-2.76-2.24-5-5-5S7 4.24 7 7v1H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V7c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v1z"/></svg>`,
-    datadog: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    grafana: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    opa: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    snyk: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-    vanta: `<svg class="w-7 h-7 text-gold-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
-  }
-  return logos[logo] || logos.opensource
-}
+const categories = [
+  { key: 'ai', title: 'Inteligência artificial', items: ['Microsoft Copilot', 'ChatGPT', 'Claude', 'Llama'] },
+  { key: 'cloud', title: 'Cloud', items: ['Microsoft Azure', 'AWS', 'Google Cloud'] },
+  { key: 'infra', title: 'Infraestrutura & automação', items: ['Linux', 'VMware', 'Kubernetes', 'Terraform', 'Ansible'] },
+  { key: 'obs', title: 'Observabilidade', items: ['Grafana', 'Prometheus', 'Datadog'] },
+];
 ---
-
-<section id="tecnologias" class={`section bg-slate-950/50 relative ${className}`} aria-labelledby="tech-title">
-  <div class="container-custom">
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="inline-block px-4 py-2 rounded-full bg-slate-900/50 border border-slate-700/50 text-gold-400 text-sm font-medium mb-6">
-        Tecnologias & Parcerias
-      </span>
-      <h2 id="tech-title" class="section-title text-gradient-gold">
-        As Melhores Ferramentas,<br /><span class="text-slate-100">A Melhor Arquitetura</span>
-      </h2>
-      <p class="section-subtitle mx-auto">
-        Somos agnósticos de tecnologia — escolhemos o que há de melhor para cada caso de uso.
-        Parcerias oficiais com os principais players do mercado.
-      </p>
+<section id="tecnologias" class="section tech-section" aria-labelledby="tech-title">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow" data-i18n="tech.eyebrow">03 / Ecossistema tecnológico</p>
+        <h2 id="tech-title" data-i18n="tech.title">A ferramenta certa.<br /><span class="muted">Para o seu cenário.</span></h2>
+      </div>
+      <p data-i18n="tech.desc">A escolha começa no problema, não no fornecedor. Avaliamos as tecnologias conforme os requisitos de cada projeto.</p>
     </div>
-
-    <!-- Tech Categories -->
-    <div class="space-y-16">
-      <!-- AI Platforms -->
-      <div>
-        <h3 class="text-lg font-semibold text-gold-400 mb-8 flex items-center gap-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-          </svg>
-          Plataformas de IA Generativa
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 lg:gap-6">
-          {aiPlatforms.map(item => (
-            <article class="card p-5 group relative overflow-hidden" tabindex="0">
-              <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div class="relative flex flex-col items-center text-center h-full">
-                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-slate-900/50 border border-slate-700/50 flex items-center justify-center group-hover:border-gold-500/50 group-hover:bg-gold-500/10 transition-all duration-300">
-                  <span set:html={getLogoSVG(item.logo)} />
-                </div>
-                <h4 class="font-semibold text-slate-100 text-sm leading-snug">{item.name}</h4>
-                <span class="text-xs text-slate-500 mt-1 px-2 py-0.5 rounded bg-slate-900/50 border border-slate-800/50">{item.category}</span>
-              </div>
-            </article>
-          ))}
+    <div class="tech-list">
+      {categories.map((category) => (
+        <div class="tech-row">
+          <h3 data-i18n={`tech.cat.${category.key}.title`}>{category.title}</h3>
+          <ul role="list">
+            {category.items.map((item, i) => (
+              <li data-i18n={`tech.cat.${category.key}.items.${i}`}>{item}</li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      <!-- Infrastructure -->
-      <div>
-        <h3 class="text-lg font-semibold text-gold-400 mb-8 flex items-center gap-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
-          </svg>
-          Infraestrutura & Servidores
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6">
-          {infrastructure.map(item => (
-            <article class="card p-5 group relative overflow-hidden" tabindex="0">
-              <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div class="relative flex flex-col items-center text-center h-full">
-                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-slate-900/50 border border-slate-700/50 flex items-center justify-center group-hover:border-gold-500/50 group-hover:bg-gold-500/10 transition-all duration-300">
-                  <span set:html={getLogoSVG(item.logo)} />
-                </div>
-                <h4 class="font-semibold text-slate-100 text-sm leading-snug">{item.name}</h4>
-                <span class="text-xs text-slate-500 mt-1 px-2 py-0.5 rounded bg-slate-900/50 border border-slate-800/50">{item.category}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <!-- Cloud & DevOps -->
-      <div>
-        <h3 class="text-lg font-semibold text-gold-400 mb-8 flex items-center gap-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-          </svg>
-          Cloud, DevOps & Data
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 lg:gap-6">
-          {cloudDevOps.map(item => (
-            <article class="card p-5 group relative overflow-hidden" tabindex="0">
-              <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div class="relative flex flex-col items-center text-center h-full">
-                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-slate-900/50 border border-slate-700/50 flex items-center justify-center group-hover:border-gold-500/50 group-hover:bg-gold-500/10 transition-all duration-300">
-                  <span set:html={getLogoSVG(item.logo)} />
-                </div>
-                <h4 class="font-semibold text-slate-100 text-sm leading-snug">{item.name}</h4>
-                <span class="text-xs text-slate-500 mt-1 px-2 py-0.5 rounded bg-slate-900/50 border border-slate-800/50">{item.category}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <!-- Security & Observability -->
-      <div>
-        <h3 class="text-lg font-semibold text-gold-400 mb-8 flex items-center gap-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-          Segurança, Observabilidade & Governança
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6">
-          {security.map(item => (
-            <article class="card p-5 group relative overflow-hidden" tabindex="0">
-              <div class="absolute inset-0 bg-gradient-to-br from-gold-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div class="relative flex flex-col items-center text-center h-full">
-                <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-slate-900/50 border border-slate-700/50 flex items-center justify-center group-hover:border-gold-500/50 group-hover:bg-gold-500/10 transition-all duration-300">
-                  <span set:html={getLogoSVG(item.logo)} />
-                </div>
-                <h4 class="font-semibold text-slate-100 text-sm leading-snug">{item.name}</h4>
-                <span class="text-xs text-slate-500 mt-1 px-2 py-0.5 rounded bg-slate-900/50 border border-slate-800/50">{item.category}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
+      ))}
     </div>
-
-    <!-- Certification Badges -->
-    <div class="mt-16 pt-16 border-t border-slate-800/50">
-      <h3 class="text-lg font-semibold text-gold-400 mb-8 text-center">Certificações & Competências</h3>
-      <div class="flex flex-wrap justify-center gap-4 lg:gap-6">
-        {certifications.map(cert => (
-          <div class="card p-4 lg:p-6 min-w-[200px] text-center group">
-            <div class="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/10 border border-gold-500/30 flex items-center justify-center group-hover:bg-gradient-to-br from-gold-500/30 to-gold-600/20 group-hover:border-gold-500 transition-all duration-300">
-              <svg class="w-5 h-5 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            </div>
-            <h4 class="font-semibold text-slate-100 text-sm leading-snug">{cert.name}</h4>
-            <p class="text-xs text-slate-500 mt-1">{cert.sub}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <p class="tech-disclaimer" data-i18n="tech.disclaimer">Tecnologias de referência. As marcas citadas pertencem aos seus respectivos titulares e não representam vínculo de parceria ou certificação.</p>
   </div>
 </section>
-
-<style>
-  @media (prefers-reduced-motion: reduce) {
-    .group-hover\:opacity-100 { opacity: 0; }
-    .group-hover\:border-gold-500\/50 { border-color: transparent; }
-    .group-hover\:bg-gradient-to-br { background: none; }
-  }
-</style>

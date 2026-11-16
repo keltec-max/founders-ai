@@ -4,8 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
 
 export default defineConfig({
-  site: 'https://founders.ai',
-  base: '/',
+  site: 'https://keltec-max.github.io',
+  base: '/founders-ai/',
   output: 'static',
   trailingSlash: 'always',
   build: {

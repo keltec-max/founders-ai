@@ -11,33 +11,31 @@ Site institucional da **Founders AI**, empresa de consultoria especializada em I
 
 ## 🎨 Design System
 
-- **Cores**: Slate 950 (background) + Gold 500/600 (accent)
-- **Tipografia**: Space Grotesk (headings) + Inter (body)
-- **Animações**: SVG SMIL + CSS (respeita `prefers-reduced-motion`)
-- **Acessibilidade**: WCAG 2.2 AA compliant
+- **Cores**: fundo #0d0f11 (preto grafite), painel #151719, texto #f1f0eb, muted #abaeae, destaque #d6b779 (dourado discreto), borda #303335
+- **Tipografia**: Space Grotesk (headings) + Inter (body), via Google Fonts
+- **Animações**: LEDs em CSS nos racks do hero (2 ciclos de 2s); desativadas com `prefers-reduced-motion: reduce`
+- **Acessibilidade**: skip link para conteúdo principal, semântica HTML5 (header/nav/main/section/footer), ARIA labels, foco visível em interativos. Verificado por inspeção — não há afirmação de conformidade WCAG completa.
 
 ## 📦 Estrutura do Projeto
 
 ```
 src/
 ├── components/
-│   ├── Hero.astro          # Hero com background SVG animado (data center)
-│   ├── About.astro         # Sobre nós + diferenciais + stats
-│   ├── Services.astro      # 6 cards de serviços
-│   ├── Technologies.astro  # Tech stack + certificações
-│   └── Contact.astro       # Formulário Formspree + info de contato
+│   ├── Hero.astro          # Hero em duas colunas: cópia + racks de LEDs em CSS
+│   ├── About.astro         # História (data center → IA generativa) + processo de 4 passos
+│   ├── Services.astro      # 6 cards de serviços com número, descrição e bullets
+│   ├── Technologies.astro  # Ecossistema tecnológico (IA, cloud, infra, observabilidade)
+│   └── Contact.astro       # Contato em configuração: sem formulário, sem coleta de dados
 ├── layouts/
-│   └── Layout.astro        # Layout raiz com SEO, a11y, fonts
+│   └── Layout.astro        # Layout raiz com SEO, a11y e fontes
 ├── pages/
-│   └── index.astro         # Página principal
-├── styles/
-│   └── global.css          # Tailwind v4 @theme + utilitários customizados
+│   └── index.astro         # Página principal (base /founders-ai/)
+└── styles/
+    └── global.css          # Tailwind v4 @theme + tokens CSS e utilitários
 public/
-├── favicon.svg             # Logo "F" estilo Forbes
-├── manifest.json           # PWA manifest
-└── robots.txt              # SEO
-.github/workflows/
-└── deploy.yml              # GitHub Actions para Pages
+├── favicon.svg             # Marca "A" em dourado
+├── manifest.json           # PWA manifest (start_url /founders-ai/)
+└── robots.txt              # SEO com sitemap do GitHub Pages
 ```
 
 ## 🛠️ Desenvolvimento Local
@@ -56,34 +54,26 @@ npm run build
 npm run preview
 ```
 
-## 🌐 Deploy no GitHub Pages
+## 🌐 Hospedagem no GitHub Pages
 
-1. Push para branch `main`/`master`
-2. GitHub Actions executa build e deploy automaticamente
-3. Site disponível em `https://<usuario>.github.io/<repo>/` ou domínio customizado
-
-### Configuração de domínio customizado
-
-1. Adicione arquivo `CNAME` em `public/` com seu domínio
-2. Configure DNS (A records para GitHub Pages IPs + CNAME www)
-3. Ative "Enforce HTTPS" nas settings do Pages
+O site é um site estático de projeto servido sob `/founders-ai/` (ex: `https://keltec-max.github.io/founders-ai/`). O build é gerado localmente com `npm run build` em `dist/`; não há deploy automático configurado neste repositório — publicar cabe a quem mantém o repositório.
 
 ## ♿ Acessibilidade
 
-- Skip link para conteúdo principal
-- Semântica HTML5 correta (header, main, section, footer)
-- ARIA labels e roles apropriados
-- Foco visível (`focus-visible`) em todos os interativos
-- Contraste AA em todos os textos
-- `prefers-reduced-motion` respeitado
-- Formulário com validação client-side e anúncios ARIA
+- Skip link "Pular para o conteúdo principal" → `#main-content`
+- Semântica HTML5 (header, nav, main, section, footer)
+- ARIA labels e `aria-hidden` em elementos decorativos
+- Foco visível em interativos
+- `prefers-reduced-motion` respeitado (animações desativadas)
+- Sem formulário ativo: não há campos de entrada a validar
+
+> Verificado por inspeção local (keyboard, foco, âncoras, reduced motion) nos viewports 1440×900, 390×844 e 320px. Não há afirmação de conformidade WCAG completa.
 
 ## 🔒 Segurança
 
-- Headers via meta tags (X-Content-Type-Options, Referrer-Policy)
-- Formspree para formulário (sem backend próprio)
-- Honeypot anti-spam no formulário
-- CSP-ready (pode adicionar via `_headers` se necessário)
+- Site estático sem backend, sem coleta de dados e sem formulário ativo
+- Sem hardcoded secrets, sem credenciais no código
+- Cabeçalhos de segurança via meta tags no layout
 
 ## 📱 PWA Ready
 
@@ -94,4 +84,4 @@ npm run preview
 
 ## 📄 Licença
 
-Proprietário - Founders AI © 2024
+Proprietário - Founders AI © 2026

@@ -1,141 +1,61 @@
 ---
-interface Props {
-  className?: string
-}
-const { className = '' } = Astro.props
 ---
 
-<section id="sobre" class="section bg-slate-950/50 relative {className}" aria-labelledby="about-title">
-  <div class="container-custom">
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="inline-block px-4 py-2 rounded-full bg-slate-900/50 border border-slate-700/50 text-gold-400 text-sm font-medium mb-6">
-        Sobre Nós
-      </span>
-      <h2 id="about-title" class="section-title text-gradient-gold">
-        Experiência Corporativa,<br /><span class="text-slate-100">Inovação em IA</span>
-      </h2>
-      <p class="section-subtitle mx-auto">
-        Com mais de 15 anos atendendo grandes corporações, unimos expertise em infraestrutura crítica
-        às mais avançadas tecnologias de Inteligência Artificial para entregar resultados reais.
-      </p>
-    </div>
-
-    <!-- Content Grid -->
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <!-- Text Content -->
-      <div class="space-y-8">
-        <div class="space-y-6">
-          <h3 class="text-2xl font-bold text-slate-100 font-space-grotesk">
-            Do Data Center para a Era da IA Generativa
-          </h3>
-          <p class="text-slate-300 leading-relaxed text-lg">
-            Nossa trajetória começou na gestão de infraestrutura de missão crítica para bancos,
-            seguradoras e grandes varejistas. Essa base sólida em servidores, redes, storage e
-            alta disponibilidade nos dá uma vantagem única: entendemos não apenas <em class="text-gold-400 font-medium">como</em>
-            implementar IA, mas <em class="text-gold-400 font-medium">onde</em> ela roda, <em class="text-gold-400 font-medium">como</em> escala
-            e <em class="text-gold-400 font-medium">como</em> proteger seus dados.
-          </p>
-          <p class="text-slate-400 leading-relaxed">
-            Hoje, somos parceiros estratégicos para empresas que querem adotar Copilot, ChatGPT Enterprise,
-            Claude e modelos open-source com governança, segurança e ROI mensurável. Não vendemos hype —
-            entregamos arquitetura, implementação e evolução contínua.
-          </p>
-        </div>
-
-        <!-- Differentiators -->
-        <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800/50">
-          <div class="flex items-start gap-4 p-4 bg-slate-900/50 border border-slate-800/50 rounded-xl hover:border-gold-500/30 transition-colors">
-            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/10 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-100">Segurança First</h4>
-              <p class="text-slate-400 text-sm mt-1">LGPD, ISO 27001, SOC 2 — compliance nativo em cada projeto</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4 p-4 bg-slate-900/50 border border-slate-800/50 rounded-xl hover:border-gold-500/30 transition-colors">
-            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/10 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-100">Velocidade de Entrega</h4>
-              <p class="text-slate-400 text-sm mt-1">PoCs em semanas, não meses — metodologia ágil comprovada</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4 p-4 bg-slate-900/50 border border-slate-800/50 rounded-xl hover:border-gold-500/30 transition-colors">
-            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/10 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-100">ROI Mensurável</h4>
-              <p class="text-slate-400 text-sm mt-1">KPIs definidos desde o day one — redução de custos, ganho de produtividade</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4 p-4 bg-slate-900/50 border border-slate-800/50 rounded-xl hover:border-gold-500/30 transition-colors">
-            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/10 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-100">Parceria Contínua</h4>
-              <p class="text-slate-400 text-sm mt-1">Suporte 24/7, treinamento de times e evolução constante dos modelos</p>
-            </div>
-          </div>
-        </div>
+<section id="sobre" class="section" aria-labelledby="about-title">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow" data-i18n="about.eyebrow">Sobre a Founders AI</p>
+        <h2 id="about-title" data-i18n="about.title">Do data center para a IA generativa</h2>
       </div>
-
-      <!-- Visual / Stats -->
-      <div class="relative">
-        <div class="bg-gradient-to-br from-slate-900/80 to-slate-950/80 border border-slate-800/50 rounded-3xl p-8 relative overflow-hidden">
-          <div class="absolute inset-0 bg-grid-pattern opacity-20" />
-          <div class="absolute top-0 right-0 w-72 h-72 bg-radial-gold opacity-50" />
-
-          <div class="relative grid grid-cols-2 gap-6">
-            <div class="text-center p-6 bg-slate-950/50 border border-slate-800/50 rounded-2xl">
-              <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient-gold font-space-grotesk">15+</div>
-              <div class="text-slate-400 mt-2 font-medium">Anos de Mercado</div>
+      <p data-i18n="about.desc">Infraestrutura crítica de missão é a base. Sobre ela, entregamos adoção de inteligência artificial com governança, segurança e entrega contínua.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-intro">
+        <h3 data-i18n="about.base.title">Nossa base</h3>
+        <p data-i18n="about.base.p1">
+          Começamos na gestão de infraestrutura crítica para bancos, seguradoras e grandes varejistas: servidores, redes,
+          storage e alta disponibilidade. Essa experiência é a vantagem que trazemos para a inteligência artificial —
+          sabemos onde ela roda, como ela escala e como proteger os dados dela.
+        </p>
+        <p data-i18n="about.base.p2">
+          Não vendemos hype. Entregamos arquitetura, implementação e evolução contínua para empresas que adotam Copilot,
+          ChatGPT Enterprise, Claude e modelos open-source com responsabilidade.
+        </p>
+      </div>
+      <div>
+        <h3 data-i18n="about.process.title">Como trabalhamos</h3>
+        <ol class="process-list">
+          <li>
+            <span>01</span>
+            <div>
+              <h4 data-i18n="about.process.01.title">Descoberta</h4>
+              <p data-i18n="about.process.01.desc">Avaliamos maturidade, casos de uso e requisitos de infraestrutura.</p>
             </div>
-            <div class="text-center p-6 bg-slate-950/50 border border-slate-800/50 rounded-2xl">
-              <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient-gold font-space-grotesk">500+</div>
-              <div class="text-slate-400 mt-2 font-medium">Servidores Gerenciados</div>
+          </li>
+          <li>
+            <span>02</span>
+            <div>
+              <h4 data-i18n="about.process.02.title">Arquitetura</h4>
+              <p data-i18n="about.process.02.desc">Definimos modelo de IA, ambiente de servidores e governança de dados.</p>
             </div>
-            <div class="text-center p-6 bg-slate-950/50 border border-slate-800/50 rounded-2xl">
-              <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient-gold font-space-grotesk">99.9%</div>
-              <div class="text-slate-400 mt-2 font-medium">SLA Disponibilidade</div>
+          </li>
+          <li>
+            <span>03</span>
+            <div>
+              <h4 data-i18n="about.process.03.title">Implantação</h4>
+              <p data-i18n="about.process.03.desc">Implementamos, integramos a sistemas legados e treinamos times.</p>
             </div>
-            <div class="text-center p-6 bg-slate-950/50 border border-slate-800/50 rounded-2xl">
-              <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient-gold font-space-grotesk">50+</div>
-              <div class="text-slate-400 mt-2 font-medium">Projetos IA Entregues</div>
+          </li>
+          <li>
+            <span>04</span>
+            <div>
+              <h4 data-i18n="about.process.04.title">Evolução</h4>
+              <p data-i18n="about.process.04.desc">Acompanhamos uso, ajustamos modelos e mantemos a operação segura.</p>
             </div>
-          </div>
-        </div>
-
-        <!-- Floating badge -->
-        <div class="absolute -bottom-6 -right-6 bg-gradient-to-r from-gold-500 to-gold-600 text-slate-950 px-6 py-4 rounded-2xl shadow-2xl shadow-gold-500/30 animate-float">
-          <div class="font-bold text-lg font-space-grotesk">Enterprise Ready</div>
-          <div class="text-sm opacity-80">Certificado ISO 27001 • SOC 2</div>
-        </div>
+          </li>
+        </ol>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  .animate-float { animation: float 4s ease-in-out infinite; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-float { animation: none; transform: none; }
-  }
-</style>
